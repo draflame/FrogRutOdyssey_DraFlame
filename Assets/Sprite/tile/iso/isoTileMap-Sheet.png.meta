@@ -1,0 +1,923 @@
+fileFormatVersion: 2
+guid: c4bb2bc44059df240bbec6137df27014
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4748671108351423960
+    second: isoTileMap-Sheet_0
+  - first:
+      213: 1261164790162432782
+    second: isoTileMap-Sheet_1
+  - first:
+      213: 2832980271200400978
+    second: isoTileMap-Sheet_2
+  - first:
+      213: 5461822588516264617
+    second: isoTileMap-Sheet_3
+  - first:
+      213: 7914402954035273734
+    second: isoTileMap-Sheet_4
+  - first:
+      213: -7321192245808450807
+    second: isoTileMap-Sheet_5
+  - first:
+      213: -3101321710510276517
+    second: isoTileMap-Sheet_6
+  - first:
+      213: -948731328158909318
+    second: isoTileMap-Sheet_7
+  - first:
+      213: 3763784639507267380
+    second: isoTileMap-Sheet_8
+  - first:
+      213: -1026763868853469538
+    second: isoTileMap-Sheet_9
+  - first:
+      213: 4736002388960532063
+    second: isoTileMap-Sheet_10
+  - first:
+      213: -4102587409206123689
+    second: isoTileMap-Sheet_11
+  - first:
+      213: 4903839438633556633
+    second: isoTileMap-Sheet_12
+  - first:
+      213: 427112144906848828
+    second: isoTileMap-Sheet_13
+  - first:
+      213: -1428693556209225029
+    second: isoTileMap-Sheet_14
+  - first:
+      213: 179906395092234063
+    second: isoTileMap-Sheet_15
+  - first:
+      213: -1950172175958773383
+    second: isoTileMap-Sheet_16
+  - first:
+      213: -4196863818021930515
+    second: isoTileMap-Sheet_17
+  - first:
+      213: -830827673842585483
+    second: isoTileMap-Sheet_18
+  - first:
+      213: 3501842969675434309
+    second: isoTileMap-Sheet_19
+  - first:
+      213: -7987595954732573373
+    second: isoTileMap-Sheet_20
+  - first:
+      213: 4089605016328346870
+    second: isoTileMap-Sheet_21
+  - first:
+      213: -7688596650463417232
+    second: isoTileMap-Sheet_22
+  - first:
+      213: 8887803508597842116
+    second: isoTileMap-Sheet_23
+  - first:
+      213: 3994951279291410084
+    second: isoTileMap-Sheet_24
+  - first:
+      213: 3671817551387620957
+    second: isoTileMap-Sheet_25
+  - first:
+      213: -834321901518203081
+    second: isoTileMap-Sheet_26
+  - first:
+      213: 3239490956871139492
+    second: isoTileMap-Sheet_27
+  - first:
+      213: -6658930305374502902
+    second: isoTileMap-Sheet_28
+  - first:
+      213: -5006738576959325540
+    second: isoTileMap-Sheet_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82a8d8759c4591eb0800000000000000
+      internalID: -4748671108351423960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 15
+        width: 34
+        height: 24
+      alignment: 9
+      pivot: {x: 0.4939602, y: 0.38875413}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e03acd8d1be808110800000000000000
+      internalID: 1261164790162432782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 15
+        width: 34
+        height: 21
+      alignment: 9
+      pivot: {x: 0.4751246, y: 0.47852063}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 256f6900c84c05720800000000000000
+      internalID: 2832980271200400978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9aa67bec4ba4ccb40800000000000000
+      internalID: 5461822588516264617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 15
+        width: 34
+        height: 19
+      alignment: 9
+      pivot: {x: 0.48341727, y: 0.49703255}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 600239ced8b95dd60800000000000000
+      internalID: 7914402954035273734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 15
+        width: 34
+        height: 20
+      alignment: 9
+      pivot: {x: 0.4923015, y: 0.48544234}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9033e381176e56a90800000000000000
+      internalID: -7321192245808450807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 15
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5004d6f554e5f4d0800000000000000
+      internalID: -3101321710510276517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7cbdc532ed65d2f0800000000000000
+      internalID: -948731328158909318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43ff6e03036ab3430800000000000000
+      internalID: 3763784639507267380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9e78c883b330c1f0800000000000000
+      internalID: -1026763868853469538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f56d4619419a9b140800000000000000
+      internalID: 4736002388960532063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 15
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 753674edc7ea017c0800000000000000
+      internalID: -4102587409206123689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99add4fdcffed0440800000000000000
+      internalID: 4903839438633556633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3a8d6c9b386de500800000000000000
+      internalID: 427112144906848828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb27249b7c24c2ce0800000000000000
+      internalID: -1428693556209225029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 15
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4f2b44c9e72f7200800000000000000
+      internalID: 179906395092234063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 1037
+        y: 15
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97170290db89fe4e0800000000000000
+      internalID: -1950172175958773383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 15
+        width: 34
+        height: 22
+      alignment: 9
+      pivot: {x: 0.48899573, y: 0.42173204}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de9fc1ce79eb1c5c0800000000000000
+      internalID: -4196863818021930515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 15
+        width: 35
+        height: 21
+      alignment: 9
+      pivot: {x: 0.4661063, y: 0.45582363}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5707c0fe1ae4874f0800000000000000
+      internalID: -830827673842585483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 1229
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54904ba90ab099030800000000000000
+      internalID: 3501842969675434309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 1293
+        y: 15
+        width: 34
+        height: 24
+      alignment: 9
+      pivot: {x: 0.44865867, y: 0.40907526}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34d51dc9ccb562190800000000000000
+      internalID: -7987595954732573373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 1357
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fc18ed381231c830800000000000000
+      internalID: 4089605016328346870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 1421
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07caed3151e9c4590800000000000000
+      internalID: -7688596650463417232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 15
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c0e1739332d75b70800000000000000
+      internalID: 8887803508597842116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 1549
+        y: 15
+        width: 34
+        height: 21
+      alignment: 9
+      pivot: {x: 0.49883315, y: 0.46386057}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a62829b50be07730800000000000000
+      internalID: 3994951279291410084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 1613
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d56f08edb9ae4f230800000000000000
+      internalID: 3671817551387620957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 1677
+        y: 15
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 737dda7a6a4eb64f0800000000000000
+      internalID: -834321901518203081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 1741
+        y: 15
+        width: 34
+        height: 46
+      alignment: 9
+      pivot: {x: 0.5, y: 0.21272627}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a005699cdbf4fc20800000000000000
+      internalID: 3239490956871139492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 15
+        width: 66
+        height: 79
+      alignment: 9
+      pivot: {x: 0.465824, y: 0.115695275}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a00c114fa2ab693a0800000000000000
+      internalID: -6658930305374502902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: isoTileMap-Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 1859
+        y: 0
+        width: 47
+        height: 79
+      alignment: 9
+      pivot: {x: 0.57383174, y: 0.103528686}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9a38158acd748ab0800000000000000
+      internalID: -5006738576959325540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 21117b27ee09a114590dd3a7d589c5e8
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      isoTileMap-Sheet_0: -4748671108351423960
+      isoTileMap-Sheet_1: 1261164790162432782
+      isoTileMap-Sheet_10: 4736002388960532063
+      isoTileMap-Sheet_11: -4102587409206123689
+      isoTileMap-Sheet_12: 4903839438633556633
+      isoTileMap-Sheet_13: 427112144906848828
+      isoTileMap-Sheet_14: -1428693556209225029
+      isoTileMap-Sheet_15: 179906395092234063
+      isoTileMap-Sheet_16: -1950172175958773383
+      isoTileMap-Sheet_17: -4196863818021930515
+      isoTileMap-Sheet_18: -830827673842585483
+      isoTileMap-Sheet_19: 3501842969675434309
+      isoTileMap-Sheet_2: 2832980271200400978
+      isoTileMap-Sheet_20: -7987595954732573373
+      isoTileMap-Sheet_21: 4089605016328346870
+      isoTileMap-Sheet_22: -7688596650463417232
+      isoTileMap-Sheet_23: 8887803508597842116
+      isoTileMap-Sheet_24: 3994951279291410084
+      isoTileMap-Sheet_25: 3671817551387620957
+      isoTileMap-Sheet_26: -834321901518203081
+      isoTileMap-Sheet_27: 3239490956871139492
+      isoTileMap-Sheet_28: -6658930305374502902
+      isoTileMap-Sheet_29: -5006738576959325540
+      isoTileMap-Sheet_3: 5461822588516264617
+      isoTileMap-Sheet_4: 7914402954035273734
+      isoTileMap-Sheet_5: -7321192245808450807
+      isoTileMap-Sheet_6: -3101321710510276517
+      isoTileMap-Sheet_7: -948731328158909318
+      isoTileMap-Sheet_8: 3763784639507267380
+      isoTileMap-Sheet_9: -1026763868853469538
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb85282e72152864b8f54b2b758800cf, type: 3}
+  m_Name: Level5
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  width: 6
+  height: 6
+  map: 000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000002000000010000000200000000000000020000000200000002000000010000000200000000000000010000000100000001000000010000000100000000000000010000000100000001000000010000000100000000000000
+  startTile: {x: 0, y: 4}
+  difficulty: 0
+  solutionPath: []
