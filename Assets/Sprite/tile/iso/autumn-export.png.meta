@@ -1,0 +1,1027 @@
+fileFormatVersion: 2
+guid: 5bcfcd91c6c09664da53262b5b86c079
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6667913175425444382
+    second: autumn-export_0
+  - first:
+      213: 6991250023998566498
+    second: autumn-export_1
+  - first:
+      213: 7566718972736671934
+    second: autumn-export_2
+  - first:
+      213: 7499634749607541784
+    second: autumn-export_3
+  - first:
+      213: 2789848017628701895
+    second: autumn-export_4
+  - first:
+      213: 8122659562352711742
+    second: autumn-export_5
+  - first:
+      213: 5854825664959360236
+    second: autumn-export_6
+  - first:
+      213: 7916623570816584622
+    second: autumn-export_7
+  - first:
+      213: 7527347956829306361
+    second: autumn-export_8
+  - first:
+      213: 8357019555233288483
+    second: autumn-export_9
+  - first:
+      213: -7535615124503307912
+    second: autumn-export_10
+  - first:
+      213: 6515891064327175703
+    second: autumn-export_11
+  - first:
+      213: 8347348138132797699
+    second: autumn-export_12
+  - first:
+      213: 3864578113201195129
+    second: autumn-export_13
+  - first:
+      213: -1625480394333661090
+    second: autumn-export_14
+  - first:
+      213: 7256092663370696181
+    second: autumn-export_15
+  - first:
+      213: -8142427066004797944
+    second: autumn-export_16
+  - first:
+      213: 6821682847951236928
+    second: autumn-export_17
+  - first:
+      213: -63637406154342104
+    second: autumn-export_18
+  - first:
+      213: -6285883536304743979
+    second: autumn-export_19
+  - first:
+      213: 4485509507073051807
+    second: autumn-export_20
+  - first:
+      213: 787257182219341220
+    second: autumn-export_21
+  - first:
+      213: -7616973358974102340
+    second: autumn-export_22
+  - first:
+      213: -5730871365197601931
+    second: autumn-export_23
+  - first:
+      213: -5437425286011036331
+    second: autumn-export_24
+  - first:
+      213: -7632483626254255801
+    second: autumn-export_25
+  - first:
+      213: 8452892997166407867
+    second: autumn-export_26
+  - first:
+      213: -5728974582133063976
+    second: autumn-export_27
+  - first:
+      213: 6113422292893589122
+    second: autumn-export_28
+  - first:
+      213: -431161613713862354
+    second: autumn-export_29
+  - first:
+      213: 2721291610313003728
+    second: autumn-export_30
+  - first:
+      213: 3604081995205211961
+    second: autumn-export_31
+  - first:
+      213: -5195597378743901675
+    second: autumn-export_32
+  - first:
+      213: 8240265555838624617
+    second: autumn-export_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: autumn-export_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 376
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1a616674bf298c50800000000000000
+      internalID: 6667913175425444382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 376
+        width: 34
+        height: 19
+      alignment: 9
+      pivot: {x: 0.49870503, y: 0.44901314}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26030680bd8e50160800000000000000
+      internalID: 6991250023998566498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_2
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 376
+        width: 34
+        height: 33
+      alignment: 9
+      pivot: {x: 0.48834407, y: 0.25847742}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb09d25c0d2620960800000000000000
+      internalID: 7566718972736671934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_3
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 376
+        width: 34
+        height: 28
+      alignment: 9
+      pivot: {x: 0.49190253, y: 0.31194633}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81c788be11e041860800000000000000
+      internalID: 7499634749607541784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_4
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 344
+        width: 34
+        height: 29
+      alignment: 9
+      pivot: {x: 0.4890438, y: 0.28162885}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c42614adf787b620800000000000000
+      internalID: 2789848017628701895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_5
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 344
+        width: 34
+        height: 28
+      alignment: 9
+      pivot: {x: 0.48704866, y: 0.30341774}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e38967516db79b070800000000000000
+      internalID: 8122659562352711742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_6
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 344
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cec2ebd0ce4804150800000000000000
+      internalID: 5854825664959360236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_7
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 344
+        width: 34
+        height: 20
+      alignment: 9
+      pivot: {x: 0.505061, y: 0.40019685}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eabc10f813f7ddd60800000000000000
+      internalID: 7916623570816584622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_8
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 313
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fdb29bc513867860800000000000000
+      internalID: 7527347956829306361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_9
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 312
+        width: 34
+        height: 26
+      alignment: 9
+      pivot: {x: 0.49740982, y: 0.33063683}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3215ca212091af370800000000000000
+      internalID: 8357019555233288483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_10
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 312
+        width: 34
+        height: 24
+      alignment: 9
+      pivot: {x: 0.49093404, y: 0.37890497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8795beb38fd1c6790800000000000000
+      internalID: -7535615124503307912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_11
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 312
+        width: 34
+        height: 20
+      alignment: 9
+      pivot: {x: 0.49392655, y: 0.448378}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71efc5c76681d6a50800000000000000
+      internalID: 6515891064327175703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_12
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 280
+        width: 34
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5133914, y: 0.31604117}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3097cedc7ecb7d370800000000000000
+      internalID: 8347348138132797699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_13
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 248
+        width: 34
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5073045, y: 0.2723503}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9784b1c815db1a530800000000000000
+      internalID: 3864578113201195129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_14
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 280
+        width: 34
+        height: 24
+      alignment: 9
+      pivot: {x: 0.48704866, y: 0.36606216}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e58516a81322179e0800000000000000
+      internalID: -1625480394333661090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_15
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 280
+        width: 34
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5012952, y: 0.40354267}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f5478935d1d2b460800000000000000
+      internalID: 7256092663370696181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_16
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 248
+        width: 37
+        height: 26
+      alignment: 9
+      pivot: {x: 0.53213334, y: 0.3221682}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 806024159b9400f80800000000000000
+      internalID: -8142427066004797944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_17
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 248
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04f228a486c7bae50800000000000000
+      internalID: 6821682847951236928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_18
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 216
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8214eb3cd1aed1ff0800000000000000
+      internalID: -63637406154342104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_19
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 216
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d9541f4a3e04c8a0800000000000000
+      internalID: -6285883536304743979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_20
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 216
+        width: 34
+        height: 23
+      alignment: 9
+      pivot: {x: 0.49859887, y: 0.3342995}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9c0ab5a12bbf3e30800000000000000
+      internalID: 4485509507073051807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_21
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 184
+        width: 34
+        height: 20
+      alignment: 9
+      pivot: {x: 0.4939132, y: 0.4358452}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ad0f057c36ecea00800000000000000
+      internalID: 787257182219341220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_22
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 184
+        width: 34
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb41cb226131b4690800000000000000
+      internalID: -7616973358974102340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_23
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 184
+        width: 34
+        height: 24
+      alignment: 9
+      pivot: {x: 0.4915933, y: 0.35708365}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57360f75bdad770b0800000000000000
+      internalID: -5730871365197601931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_24
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 152
+        width: 34
+        height: 20
+      alignment: 9
+      pivot: {x: 0.48295683, y: 0.43170547}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55dd596d2826a84b0800000000000000
+      internalID: -5437425286011036331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_25
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 152
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 749312f9498f31690800000000000000
+      internalID: -7632483626254255801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_26
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 153
+        width: 34
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5042038, y: 0.33975983}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb0ad744565be4570800000000000000
+      internalID: 8452892997166407867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_27
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 120
+        width: 34
+        height: 33
+      alignment: 9
+      pivot: {x: 0.51961607, y: 0.24779332}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8de77b098f79e70b0800000000000000
+      internalID: -5728974582133063976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_28
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 120
+        width: 34
+        height: 24
+      alignment: 9
+      pivot: {x: 0.48660883, y: 0.35168266}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28e50e16f2d37d450800000000000000
+      internalID: 6113422292893589122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_29
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 120
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e211dc5fbc4340af0800000000000000
+      internalID: -431161613713862354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_30
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 72
+        width: 34
+        height: 43
+      alignment: 9
+      pivot: {x: 0.48904374, y: 0.20063746}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d215f23d48f3c520800000000000000
+      internalID: 2721291610313003728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_31
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 88
+        width: 34
+        height: 24
+      alignment: 9
+      pivot: {x: 0.50231755, y: 0.35552502}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9377699ba75440230800000000000000
+      internalID: 3604081995205211961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_32
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 41
+        width: 34
+        height: 32
+      alignment: 9
+      pivot: {x: 0.48417428, y: 0.25165424}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 512e40426b785e7b0800000000000000
+      internalID: -5195597378743901675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: autumn-export_33
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 8
+        width: 34
+        height: 33
+      alignment: 9
+      pivot: {x: 0.51217395, y: 0.26168847}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 963e5ae3ddd4b5270800000000000000
+      internalID: 8240265555838624617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 260bd25e901d59244a6b4a63598b6c23
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      autumn-export_0: 6667913175425444382
+      autumn-export_1: 6991250023998566498
+      autumn-export_10: -7535615124503307912
+      autumn-export_11: 6515891064327175703
+      autumn-export_12: 8347348138132797699
+      autumn-export_13: 3864578113201195129
+      autumn-export_14: -1625480394333661090
+      autumn-export_15: 7256092663370696181
+      autumn-export_16: -8142427066004797944
+      autumn-export_17: 6821682847951236928
+      autumn-export_18: -63637406154342104
+      autumn-export_19: -6285883536304743979
+      autumn-export_2: 7566718972736671934
+      autumn-export_20: 4485509507073051807
+      autumn-export_21: 787257182219341220
+      autumn-export_22: -7616973358974102340
+      autumn-export_23: -5730871365197601931
+      autumn-export_24: -5437425286011036331
+      autumn-export_25: -7632483626254255801
+      autumn-export_26: 8452892997166407867
+      autumn-export_27: -5728974582133063976
+      autumn-export_28: 6113422292893589122
+      autumn-export_29: -431161613713862354
+      autumn-export_3: 7499634749607541784
+      autumn-export_30: 2721291610313003728
+      autumn-export_31: 3604081995205211961
+      autumn-export_32: -5195597378743901675
+      autumn-export_33: 8240265555838624617
+      autumn-export_4: 2789848017628701895
+      autumn-export_5: 8122659562352711742
+      autumn-export_6: 5854825664959360236
+      autumn-export_7: 7916623570816584622
+      autumn-export_8: 7527347956829306361
+      autumn-export_9: 8357019555233288483
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

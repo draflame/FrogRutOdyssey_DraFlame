@@ -119,3 +119,21 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: dc6541b9dd84c4743a27d7a4398e0b55, type: 2}
   - type: 52
     tile: {fileID: 11400000, guid: c65e5ec94f5668049ae3d333eccb3f17, type: 2}
+  - type: 53
+    tile: {fileID: 11400000, guid: c3e790865df8d6a48b93b7036b4e49fe, type: 2}
+  - type: 54
+    tile: {fileID: 11400000, guid: 52b5e698471ec84449fda445720f20cc, type: 2}
+  - type: 55
+    tile: {fileID: 11400000, guid: dc4f41ed498551e45a6c1be39c74f53c, type: 2}
+  - type: 56
+    tile: {fileID: 11400000, guid: 92334d63903cf5b418a74f3f1f9e43f1, type: 2}
+  - type: 57
+    tile: {fileID: 11400000, guid: fd5b9658909fb8f419e820c7cc68e134, type: 2}
+  - type: 58
+    tile: {fileID: 11400000, guid: d27aa20c31b8f5b4089015f0269deab4, type: 2}
+  - type: 59
+    tile: {fileID: 11400000, guid: 652185d703b7f5048923d451864550cf, type: 2}
+  - type: 60
+    tile: {fileID: 11400000, guid: 4fd72af3e6f0a38439c26a07f9278b33, type: 2}
+  - type: 61
+    tile: {fileID: 11400000, guid: b2e316034a76d584cbe0c89c38b7f0bc, type: 2}
