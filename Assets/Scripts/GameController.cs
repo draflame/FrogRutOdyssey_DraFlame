@@ -1,9 +1,7 @@
-using NUnit.Framework.Internal;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 
 [System.Serializable]
 public struct MoveRecord
@@ -14,12 +12,12 @@ public struct MoveRecord
 
 class SolverState
 {
-    public TileType[] map;
+    public LogicTileType[] map;
     public HashSet<Vector2Int> visited;
 
-    public SolverState(TileType[] src)
+    public SolverState(LogicTileType[] src)
     {
-        map = src != null ? (TileType[])src.Clone() : new TileType[0];
+        map = src != null ? (LogicTileType[])src.Clone() : new LogicTileType[0];
         visited = new HashSet<Vector2Int>();
     }
 }
@@ -43,10 +41,6 @@ public class GameController : MonoBehaviour
     [Tooltip("Kéo thả các TilePack ScriptableObject vào đây. GameController sẽ tra cứu tile từ các pack này.")]
     [SerializeField] private TilePack[] tilePacks;
 
-    [Header("Legacy Tile Visual (Old System)")]
-    [Tooltip("TileVisualData cũ — giữ lại để render các level chưa migrate sang TileRef format.")]
-    [SerializeField] private TileVisualData tileSet;
-
     // Runtime lookup: packName → TilePack
     private Dictionary<string, TilePack> _packLookup;
 
@@ -68,9 +62,6 @@ public class GameController : MonoBehaviour
     // Runtime map MỚI (logic only — dùng cho solver, CanMove, win condition)
     private LogicTileType[] runtimeLogicMap;
 
-    // Runtime map CŨ — giữ lại để backward compat với level dùng TileType[]
-    private TileType[] runtimeMap;
-
     // TileRef runtime map — dùng khi level ở TileRef format
     private TileRef[] runtimeRefMap;
 
@@ -86,7 +77,7 @@ public class GameController : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private CinemachineMapFitter camFitter;
 
-    private TileType[] originalMap;
+    private TileRef[] originalRefMap;
     private Vector2Int originalStart;
     private int originalWalkable;
 
@@ -111,10 +102,6 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        // Build legacy tileset lookup
-        if (tileSet != null)
-            tileSet.BuildLookup();
-
         // Build TilePack lookup
         _packLookup = new Dictionary<string, TilePack>();
         if (tilePacks != null)
@@ -188,26 +175,8 @@ public class GameController : MonoBehaviour
         }
 
         // ── Load map runtime ──────────────────────────────────
-        if (currentLevel.UsesTileRefFormat)
-        {
-            // Format MỚI: TileRef
-            runtimeRefMap = (TileRef[])currentLevel.tileRefMap.Clone();
-            runtimeLogicMap = BuildLogicMap(currentLevel, runtimeRefMap);
-            runtimeMap = null;
-        }
-        else
-        {
-            // Format CŨ: TileType
-            if (currentLevel.map == null)
-            {
-                Debug.LogError("Level map is NULL");
-                return;
-            }
-            runtimeMap = new TileType[currentLevel.map.Length];
-            currentLevel.map.CopyTo(runtimeMap, 0);
-            runtimeLogicMap = BuildLogicMapLegacy(runtimeMap);
-            runtimeRefMap = null;
-        }
+        runtimeRefMap = currentLevel.tileRefMap != null ? (TileRef[])currentLevel.tileRefMap.Clone() : new TileRef[currentLevel.width * currentLevel.height];
+        runtimeLogicMap = BuildLogicMap(currentLevel, runtimeRefMap);
 
         // Đếm số tile phải đi qua (walkable = Lotus)
         totalWalkableTiles = 0;
@@ -269,21 +238,11 @@ public class GameController : MonoBehaviour
         int index = tile.y * currentLevel.width + tile.x;
         var cell = new Vector3Int(tile.x, tile.y, 0);
 
-        if (runtimeRefMap != null)
+        if (runtimeRefMap != null && index < runtimeRefMap.Length)
         {
-            // Format mới: lấy TileRef từ snapshot ban đầu
-            // runtimeRefMap không thay đổi khi frog di chuyển → vẫn chứa ref gốc
             TileRef tref = runtimeRefMap[index];
             TileBase tb = ResolveTileBase(tref);
             lotusTilemap.SetTile(cell, tb);
-        }
-        else if (runtimeMap != null)
-        {
-            // Format cũ: dùng TileType trong runtimeMap (vừa được set lại)
-            TileType t = runtimeMap[index];
-            if (tileSet != null && tileSet._lookup != null &&
-                tileSet._lookup.TryGetValue(t, out var tb))
-                lotusTilemap.SetTile(cell, tb);
         }
     }
 
@@ -296,21 +255,11 @@ public class GameController : MonoBehaviour
                 int index = y * currentLevel.width + x;
                 TileBase tileBase = null;
 
-                if (runtimeRefMap != null)
+                if (runtimeRefMap != null && index < runtimeRefMap.Length)
                 {
-                    // Format MỚI: lookup từ TilePack
                     TileRef tref = runtimeRefMap[index];
                     if (tref.IsEmpty) continue;
                     tileBase = ResolveTileBase(tref);
-                }
-                else if (runtimeMap != null)
-                {
-                    // Format CŨ: dùng tileSet legacy
-                    TileType type = runtimeMap[index];
-                    if (type == TileType.Empty) continue;
-                    if (tileSet != null && tileSet._lookup != null &&
-                        tileSet._lookup.TryGetValue(type, out var tb))
-                        tileBase = tb;
                 }
 
                 if (tileBase != null)
@@ -333,19 +282,6 @@ public class GameController : MonoBehaviour
             return LogicTileType.Empty;
         int index = y * currentLevel.width + x;
         return runtimeLogicMap != null ? runtimeLogicMap[index] : LogicTileType.Empty;
-    }
-
-    /// <summary>Backward compat — trả về TileType cũ (chỉ dùng nếu cần).</summary>
-    public TileType GetTileType(int x, int y)
-    {
-        if (x < 0 || y < 0 || x >= currentLevel.width || y >= currentLevel.height)
-            return TileType.Empty;
-        if (runtimeMap != null)
-        {
-            int index = y * currentLevel.width + x;
-            return runtimeMap[index];
-        }
-        return LogicToLegacy(GetLogicTile(x, y));
     }
 
     // ===================== SPAWN =====================
@@ -479,11 +415,11 @@ public class GameController : MonoBehaviour
         OnGamePanel.SetActive(false);
     }
 
-    /// <summary>Cập nhật logic tile và re-render visual (hỗ trợ cả 2 format).</summary>
+    /// <summary>Cập nhật logic tile và re-render visual.</summary>
     public void SetLogicTile(Vector2Int tile, LogicTileType newLogic)
     {
         int index = tile.y * currentLevel.width + tile.x;
-        if (runtimeLogicMap != null)
+        if (runtimeLogicMap != null && index < runtimeLogicMap.Length)
             runtimeLogicMap[index] = newLogic;
 
         var cell = new Vector3Int(tile.x, tile.y, 0);
@@ -492,27 +428,21 @@ public class GameController : MonoBehaviour
         {
             // Empty → xóa trắng hoàn toàn
             lotusTilemap.SetTile(cell, null);
-            if (runtimeMap != null)
-                runtimeMap[index] = TileType.Empty;
         }
         else if (newLogic == LogicTileType.Water)
         {
             // Water → hiện sprite nước (frog vừa nhảy qua làm lót biến thành nước)
             TileBase waterTile = GetWaterTileBase(index);
             lotusTilemap.SetTile(cell, waterTile);
-            if (runtimeMap != null)
-                runtimeMap[index] = TileType.Water;
         }
-        // Lotus / Grass → giữ nguyên visual hiện tại (tile đã được draw lúc DrawMap)
     }
 
     /// <summary>
     /// Lấy sprite Water để hiện khi frog nhảy qua ô.
-    /// Tìm trong TilePack (entry có logicType == Water), fallback sang tileSet legacy.
+    /// Tìm trong TilePack (entry có logicType == Water).
     /// </summary>
     private TileBase GetWaterTileBase(int mapIndex)
     {
-        // Tìm trong pack cướt runtime
         if (_packLookup != null)
         {
             // Ưu tiên: nếu ô đó đang là TileRef, lấy pack tương ứng và tìm entry Water
@@ -533,35 +463,8 @@ public class GameController : MonoBehaviour
                     if (e != null && e.logicType == LogicTileType.Water && e.tile != null)
                         return e.tile;
         }
-        // Fallback cuối: legacy tileSet
-        if (tileSet != null && tileSet._lookup != null &&
-            tileSet._lookup.TryGetValue(TileType.Water, out var legacyWater))
-            return legacyWater;
 
         return null; // Không tìm được → ô sẽ trống
-    }
-
-    /// <summary>Backward compat — dùng TileType cũ.</summary>
-    public void SetTileType(Vector2Int tile, TileType newType)
-    {
-        LogicTileType logic = LevelData.LegacyToLogic(newType);
-        SetLogicTile(tile, logic);
-
-        if (runtimeMap != null)
-        {
-            int index = tile.y * currentLevel.width + tile.x;
-            runtimeMap[index] = newType;
-            var cell = new Vector3Int(tile.x, tile.y, 0);
-            if (newType == TileType.Empty)
-            {
-                lotusTilemap.SetTile(cell, null);
-            }
-            else if (tileSet != null && tileSet._lookup != null &&
-                     tileSet._lookup.TryGetValue(newType, out var tb))
-            {
-                lotusTilemap.SetTile(cell, tb);
-            }
-        }
     }
 
     public void ClearHighlights()
@@ -667,19 +570,8 @@ public class GameController : MonoBehaviour
     public bool CheckSolvable()
     {
         Vector2Int start = currentLevel.startTile;
-        // Solver vẫn dùng TileType array — nếu format mới, tạo legacy array tạm
-        TileType[] solverMap = runtimeMap ?? CreateLegacyMapFromLogic();
-        SolverState state = new SolverState(solverMap);
+        SolverState state = new SolverState(runtimeLogicMap);
         return SolveDFS(start, 1, state);
-    }
-
-    private TileType[] CreateLegacyMapFromLogic()
-    {
-        if (runtimeLogicMap == null) return new TileType[0];
-        var arr = new TileType[runtimeLogicMap.Length];
-        for (int i = 0; i < arr.Length; i++)
-            arr[i] = LogicToLegacy(runtimeLogicMap[i]);
-        return arr;
     }
 
     private bool SolveDFS(Vector2Int pos, int visitedCount, SolverState state)
@@ -694,9 +586,9 @@ public class GameController : MonoBehaviour
             Vector2Int next = pos + move;
             if (!CanMoveSolver(pos, next, state)) continue;
 
-            state.map[next.y * currentLevel.width + next.x] = TileType.Water;
+            state.map[next.y * currentLevel.width + next.x] = LogicTileType.Water;
             if (SolveDFS(next, visitedCount + 1, state)) return true;
-            state.map[next.y * currentLevel.width + next.x] = TileType.Lotus;
+            state.map[next.y * currentLevel.width + next.x] = LogicTileType.Lotus;
             state.visited.Remove(next);
         }
         return false;
@@ -707,7 +599,7 @@ public class GameController : MonoBehaviour
         if (to.x < 0 || to.y < 0 || to.x >= currentLevel.width || to.y >= currentLevel.height)
             return false;
         int index = to.y * currentLevel.width + to.x;
-        if (state.map[index] != TileType.Lotus) return false;
+        if (state.map[index] != LogicTileType.Lotus) return false;
         if (state.visited.Contains(to)) return false;
 
         Vector2Int d = to - from;
@@ -809,9 +701,15 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        runtimeMap = new TileType[width * height];
-        for (int i = 0; i < runtimeMap.Length; i++) runtimeMap[i] = TileType.Water;
-        foreach (var p in path) runtimeMap[p.y * width + p.x] = TileType.Lotus;
+        runtimeRefMap = new TileRef[width * height];
+        TileRef waterRef = FindTileRefByLogic(LogicTileType.Water);
+        TileRef lotusRef = FindTileRefByLogic(LogicTileType.Lotus);
+
+        for (int i = 0; i < runtimeRefMap.Length; i++)
+            runtimeRefMap[i] = waterRef;
+
+        foreach (var p in path)
+            runtimeRefMap[p.y * width + p.x] = lotusRef;
 
         int extra = lotusCount - path.Count;
         int tries = 0;
@@ -821,11 +719,21 @@ public class GameController : MonoBehaviour
             int x = Random.Range(0, width);
             int y = Random.Range(0, height);
             int idx = y * width + x;
-            if (runtimeMap[idx] == TileType.Water) { runtimeMap[idx] = TileType.Lotus; extra--; }
+            if (runtimeRefMap[idx].IsEmpty || (waterRef.IsEmpty ? false : runtimeRefMap[idx].tileId == waterRef.tileId))
+            {
+                runtimeRefMap[idx] = lotusRef;
+                extra--;
+            }
         }
 
-        runtimeLogicMap = BuildLogicMapLegacy(runtimeMap);
-        runtimeRefMap = null;
+        currentLevel = ScriptableObject.CreateInstance<LevelData>();
+        currentLevel.width = width;
+        currentLevel.height = height;
+        currentLevel.startTile = path[0];
+        currentLevel.localPacks = tilePacks;
+        currentLevel.tileRefMap = (TileRef[])runtimeRefMap.Clone();
+
+        runtimeLogicMap = BuildLogicMap(currentLevel, runtimeRefMap);
 
         totalWalkableTiles = 0;
         foreach (var t in runtimeLogicMap)
@@ -833,17 +741,13 @@ public class GameController : MonoBehaviour
 
         visitedTiles.Clear();
 
-        currentLevel = ScriptableObject.CreateInstance<LevelData>();
-        currentLevel.width = width;
-        currentLevel.height = height;
-        currentLevel.startTile = path[0];
-
         lotusTilemap.ClearAllTiles();
         highlightTilemap.ClearAllTiles();
 
         DrawMap();
         SpawnFrog();
-        originalMap = (TileType[])runtimeMap.Clone();
+
+        originalRefMap = (TileRef[])runtimeRefMap.Clone();
         originalStart = currentLevel.startTile;
         originalWalkable = totalWalkableTiles;
         AfterMapGenerated();
@@ -855,11 +759,10 @@ public class GameController : MonoBehaviour
         if (winUI) winUI.SetActive(false);
         if (gameOverUI) gameOverUI.SetActive(false);
         OnGamePanel.SetActive(true);
-        if (originalMap == null) { Debug.LogError("No snapshot to retry"); return; }
+        if (originalRefMap == null) { Debug.LogError("No snapshot to retry"); return; }
 
-        runtimeMap = (TileType[])originalMap.Clone();
-        runtimeLogicMap = BuildLogicMapLegacy(runtimeMap);
-        runtimeRefMap = null;
+        runtimeRefMap = (TileRef[])originalRefMap.Clone();
+        runtimeLogicMap = BuildLogicMap(currentLevel, runtimeRefMap);
         totalWalkableTiles = originalWalkable;
 
         visitedTiles.Clear();
@@ -880,7 +783,23 @@ public class GameController : MonoBehaviour
 
     // ===================== TILEPACK HELPERS =====================
 
-    /// <summary>Resolve TileRef → TileBase từ TilePack runtime.</summary>
+    private TileRef FindTileRefByLogic(LogicTileType logic)
+    {
+        if (_packLookup != null)
+        {
+            foreach (var pack in _packLookup.Values)
+            {
+                if (pack == null) continue;
+                foreach (var entry in pack.entries)
+                {
+                    if (entry != null && entry.logicType == logic && !string.IsNullOrEmpty(entry.id))
+                        return new TileRef(pack.packName, entry.id);
+                }
+            }
+        }
+        return TileRef.Empty;
+    }
+
     private TileBase ResolveTileBase(TileRef tref)
     {
         if (tref.IsEmpty) return null;
@@ -889,7 +808,6 @@ public class GameController : MonoBehaviour
         return null;
     }
 
-    /// <summary>Build LogicTileType[] từ TileRef[] (format mới).</summary>
     private LogicTileType[] BuildLogicMap(LevelData level, TileRef[] refMap)
     {
         var result = new LogicTileType[refMap.Length];
@@ -920,26 +838,5 @@ public class GameController : MonoBehaviour
             result[i] = LogicTileType.Grass;
         }
         return result;
-    }
-
-    /// <summary>Build LogicTileType[] từ TileType[] (format cũ).</summary>
-    private LogicTileType[] BuildLogicMapLegacy(TileType[] oldMap)
-    {
-        var result = new LogicTileType[oldMap.Length];
-        for (int i = 0; i < oldMap.Length; i++)
-            result[i] = LevelData.LegacyToLogic(oldMap[i]);
-        return result;
-    }
-
-    /// <summary>Convert LogicTileType → TileType cũ (backward compat).</summary>
-    private static TileType LogicToLegacy(LogicTileType logic)
-    {
-        switch (logic)
-        {
-            case LogicTileType.Lotus: return TileType.Lotus;
-            case LogicTileType.Water: return TileType.Water;
-            case LogicTileType.Grass: return TileType.Grass;
-            default:                  return TileType.Empty;
-        }
     }
 }

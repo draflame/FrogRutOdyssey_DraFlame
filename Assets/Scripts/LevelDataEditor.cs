@@ -291,11 +291,6 @@ public class LevelDataEditor : Editor
         return 0;
     }
 
-
-        Debug.Log($"[Convert] ✅ Xong. Mapped: {mapped}, Unmapped (→ Empty): {unmapped}");
-        Debug.Log("[Convert] Kiểm tra các ô bị unmapped và gán thủ công trong Editor nếu cần.");
-    }
-
     // ─────────────────────────────────────────────────────
     //  Grid Drawing
     // ─────────────────────────────────────────────────────

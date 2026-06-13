@@ -50,7 +50,32 @@ public class LevelData : ScriptableObject
 
         if (tileRefMap == null || tileRefMap.Length == 0)
         {
-            tileRefMap = new TileRef[width * height];    // ──────────────────────────────────────────────────
+            tileRefMap = new TileRef[width * height];
+        }
+
+        // Tự động tải tất cả các TilePack trong Project vào localPacks nếu chưa có
+        if (localPacks == null || localPacks.Length == 0)
+        {
+            string[] guids = UnityEditor.AssetDatabase.FindAssets("t:TilePack");
+            if (guids != null && guids.Length > 0)
+            {
+                var list = new System.Collections.Generic.List<TilePack>();
+                foreach (string guid in guids)
+                {
+                    string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+                    var pack = UnityEditor.AssetDatabase.LoadAssetAtPath<TilePack>(path);
+                    if (pack != null)
+                    {
+                        list.Add(pack);
+                    }
+                }
+                localPacks = list.ToArray();
+            }
+        }
+    }
+#endif
+
+    // ──────────────────────────────────────────────────
     //  Helpers — TileRef Map Methods
     // ──────────────────────────────────────────────────
 
