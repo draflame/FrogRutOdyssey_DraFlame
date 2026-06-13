@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class KnightTourGenerator
@@ -116,14 +116,12 @@ public class KnightTourGenerator
     /// </summary>
     public static bool IsSolvable(LevelData level)
     {
-        // Dem tong so Lotus can di qua
+        // Đếm tổng số Lotus cần đi qua — dùng GetLogic() thay vì check TileType cứng
         int totalLotus = 0;
-        for (int i = 0; i < level.map.Length; i++)
-        {
-            TileType t = level.map[i];
-            if (t == TileType.Lotus || t == TileType.LotusFlower || t == TileType.SmallLeaf)
-                totalLotus++;
-        }
+        for (int y = 0; y < level.height; y++)
+            for (int x = 0; x < level.width; x++)
+                if (level.GetLogic(x, y) == LogicTileType.Lotus)
+                    totalLotus++;
 
         if (totalLotus == 0)
         {
@@ -132,13 +130,10 @@ public class KnightTourGenerator
         }
 
         Vector2Int start = level.startTile;
-        TileType startTile = level.Get(start.x, start.y);
+        LogicTileType startLogic = level.GetLogic(start.x, start.y);
 
-        // Start phai la Lotus (hoac Grass duoc dung lam start) de co the bat dau
-        bool startIsLotus = (startTile == TileType.Lotus ||
-                             startTile == TileType.LotusFlower ||
-                             startTile == TileType.SmallLeaf);
-        bool startIsGrass = (startTile == TileType.Grass);
+        bool startIsLotus = startLogic == LogicTileType.Lotus;
+        bool startIsGrass = startLogic == LogicTileType.Grass;
 
         if (!startIsLotus && !startIsGrass)
         {
@@ -146,53 +141,39 @@ public class KnightTourGenerator
             return false;
         }
 
-        // Clone map de khong anh huong du lieu goc
-        TileType[] mapClone = (TileType[])level.map.Clone();
-        var visitedSet = new HashSet<Vector2Int>();
+        // Clone map để không ảnh hưởng dữ liệu gốc
+        // Dùng LogicTileType array cho solver
+        var logicMap = new LogicTileType[level.width * level.height];
+        for (int y = 0; y < level.height; y++)
+            for (int x = 0; x < level.width; x++)
+                logicMap[y * level.width + x] = level.GetLogic(x, y);
 
-        // Neu start la Lotus, tinh no vao count
+        var visitedSet = new HashSet<Vector2Int>();
         int startLotusCredit = startIsLotus ? 1 : 0;
 
-        // Danh dau start da di
         if (startIsLotus)
-            mapClone[start.y * level.width + start.x] = TileType.Water;
+            logicMap[start.y * level.width + start.x] = LogicTileType.Water;
 
         bool SolveDFS(Vector2Int pos, int visitedCount)
         {
             visitedSet.Add(pos);
-
-            if (visitedCount == totalLotus)
-                return true;
+            if (visitedCount == totalLotus) return true;
 
             foreach (var move in KnightMoves)
             {
                 Vector2Int next = pos + move;
-
                 if (next.x < 0 || next.y < 0 || next.x >= level.width || next.y >= level.height)
                     continue;
 
                 int idx = next.y * level.width + next.x;
-                TileType nextTile = mapClone[idx];
-
-                // Chi di qua Lotus (chua duoc danh dau)
-                bool isLotus = (nextTile == TileType.Lotus ||
-                                nextTile == TileType.LotusFlower ||
-                                nextTile == TileType.SmallLeaf);
-                if (!isLotus) continue;
+                if (logicMap[idx] != LogicTileType.Lotus) continue;
                 if (visitedSet.Contains(next)) continue;
 
-                // CHOOSE: danh dau da di
-                mapClone[idx] = TileType.Water;
-
-                // EXPLORE
-                if (SolveDFS(next, visitedCount + 1))
-                    return true;
-
-                // BACKTRACK: tra lai
-                mapClone[idx] = nextTile;
+                logicMap[idx] = LogicTileType.Water;
+                if (SolveDFS(next, visitedCount + 1)) return true;
+                logicMap[idx] = LogicTileType.Lotus;
                 visitedSet.Remove(next);
             }
-
             return false;
         }
 
