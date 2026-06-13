@@ -59,15 +59,7 @@ public class LevelDataEditor : Editor
         if (GUILayout.Button("Clear Map"))
         {
             Undo.RecordObject(level, "Clear Map");
-            if (level.UsesTileRefFormat)
-            {
-                level.tileRefMap = new TileRef[level.width * level.height];
-            }
-            else
-            {
-                for (int i = 0; i < level.map.Length; i++)
-                    level.map[i] = TileType.Empty;
-            }
+            level.tileRefMap = new TileRef[level.width * level.height];
         }
 
         if (GUILayout.Button("Check Solvable"))
@@ -106,11 +98,6 @@ public class LevelDataEditor : Editor
                 Debug.LogWarning("Start tile is not valid!");
             }
         }
-
-        GUILayout.Space(8);
-
-        // ── Convert button ──
-        DrawConvertSection(level);
 
         GUILayout.Space(10);
 
@@ -175,29 +162,104 @@ public class LevelDataEditor : Editor
             {
                 if (e == null || string.IsNullOrEmpty(e.id)) continue;
                 ids.Add($"[{e.category}] {e.id}");
-                colors.Add(e.editorColor);
+                Color c = e.editorColor;
+                if (c.a == 0f) c.a = 1f; // Force opaque if alpha is 0
+                colors.Add(c);
             }
             _cachedTileIds = ids.ToArray();
             _cachedTileColors = colors.ToArray();
 
             selectedTileIndex = Mathf.Clamp(selectedTileIndex, 0, ids.Count - 1);
-            selectedTileIndex = EditorGUILayout.Popup("Tile", selectedTileIndex, _cachedTileIds);
+            int newTileIdx = EditorGUILayout.Popup("Tile Dropdown", selectedTileIndex, _cachedTileIds);
+            if (newTileIdx != selectedTileIndex)
+            {
+                selectedTileIndex = newTileIdx;
+                var rawEntry = GetEntryAtFilteredIndex(chosenPack, selectedTileIndex);
+                selectedTileId = rawEntry?.id ?? "";
+            }
 
-            // Extract plain tileId (remove "[Category] " prefix)
-            if (selectedTileIndex < chosenPack.entries.Length)
+            // Sync selectedTileId if index is valid
+            if (selectedTileIndex < chosenPack.entries.Length && string.IsNullOrEmpty(selectedTileId))
             {
                 var rawEntry = GetEntryAtFilteredIndex(chosenPack, selectedTileIndex);
                 selectedTileId = rawEntry?.id ?? "";
             }
 
-            // Color preview
-            if (_cachedTileColors.Length > 0 && selectedTileIndex < _cachedTileColors.Length)
+            GUILayout.Space(5);
+
+            // ── Bảng màu trực quan (Visual Palette Grid Picker) ──
+            GUILayout.Label("Tile Palette (Bảng màu trực quan):", EditorStyles.boldLabel);
+            
+            float viewWidth = EditorGUIUtility.currentViewWidth;
+            int columns = Mathf.Max(1, Mathf.FloorToInt((viewWidth - 30) / 110f)); // each item ~110px wide
+            
+            var validEntries = new List<TilePackEntry>();
+            foreach (var e in chosenPack.entries)
             {
-                var previewRect = EditorGUILayout.GetControlRect(GUILayout.Height(18));
-                EditorGUI.DrawRect(previewRect, _cachedTileColors[selectedTileIndex]);
-                EditorGUI.LabelField(previewRect, $"  {selectedPackName}/{selectedTileId}",
-                    new GUIStyle(EditorStyles.label) { normal = { textColor = Color.white } });
+                if (e != null && !string.IsNullOrEmpty(e.id))
+                    validEntries.Add(e);
             }
+
+            int totalEntries = validEntries.Count;
+            int rows = Mathf.CeilToInt((float)totalEntries / columns);
+            
+            int entryIndex = 0;
+            for (int r = 0; r < rows; r++)
+            {
+                GUILayout.BeginHorizontal();
+                for (int c = 0; c < columns; c++)
+                {
+                    if (entryIndex >= totalEntries)
+                    {
+                        // Lấp đầy khoảng trống ở cuối dòng
+                        GUILayout.FlexibleSpace();
+                        continue;
+                    }
+
+                    TilePackEntry entry = validEntries[entryIndex];
+                    bool isSelected = (selectedTileId == entry.id);
+
+                    Rect btnRect = GUILayoutUtility.GetRect(105, 24);
+                    
+                    // Vẽ viền highlight màu vàng nếu đang được chọn
+                    if (isSelected)
+                    {
+                        EditorGUI.DrawRect(new Rect(btnRect.x - 2, btnRect.y - 2, btnRect.width + 4, btnRect.height + 4), new Color(1f, 0.8f, 0f));
+                    }
+
+                    // Sự kiện Click chọn tile
+                    if (GUI.Button(btnRect, "", GUIStyle.none))
+                    {
+                        selectedTileId = entry.id;
+                        selectedTileIndex = GetFilteredIndex(chosenPack, entry.id);
+                    }
+
+                    // Vẽ nền nút
+                    EditorGUI.DrawRect(btnRect, new Color(0.2f, 0.2f, 0.2f));
+
+                    // Vẽ ô màu của tile ở góc trái nút
+                    Rect colorBox = new Rect(btnRect.x + 3, btnRect.y + 3, 18, btnRect.height - 6);
+                    Color col = entry.editorColor;
+                    if (col.a == 0f) col.a = 1f; // Force opaque
+                    EditorGUI.DrawRect(colorBox, col);
+
+                    // Vẽ text label tên của tile
+                    Rect labelBox = new Rect(btnRect.x + 24, btnRect.y + 2, btnRect.width - 26, btnRect.height - 4);
+                    GUIStyle labelStyle = new GUIStyle(EditorStyles.miniLabel)
+                    {
+                        alignment = TextAnchor.MiddleLeft,
+                        normal = { textColor = isSelected ? new Color(1f, 0.8f, 0f) : Color.white },
+                        fontStyle = isSelected ? FontStyle.Bold : FontStyle.Normal
+                    };
+                    GUI.Label(labelBox, entry.id, labelStyle);
+
+                    entryIndex++;
+                }
+                GUILayout.EndHorizontal();
+                GUILayout.Space(2);
+            }
+
+            GUILayout.Space(5);
         }
         else
         {
@@ -217,97 +279,19 @@ public class LevelDataEditor : Editor
         return null;
     }
 
-    // ─────────────────────────────────────────────────────
-    //  Migration: Convert Old → TileRef
-    // ─────────────────────────────────────────────────────
-
-    private void DrawConvertSection(LevelData level)
+    private int GetFilteredIndex(TilePack pack, string tileId)
     {
-        GUILayout.Label("── Migration ──", EditorStyles.miniLabel);
-
-        if (!level.UsesTileRefFormat)
+        int count = 0;
+        foreach (var e in pack.entries)
         {
-            EditorGUILayout.HelpBox(
-                "Level này đang dùng format CŨ (TileType enum).\n" +
-                "Nhấn 'Convert → TileRef' để migrate sang format mới.",
-                MessageType.Info);
-
-            if (GUILayout.Button("Convert → TileRef Format"))
-            {
-                ConvertToTileRef(level);
-            }
+            if (e == null || string.IsNullOrEmpty(e.id)) continue;
+            if (e.id == tileId) return count;
+            count++;
         }
-        else
-        {
-            EditorGUILayout.HelpBox(
-                "✅ Level đang dùng TileRef format (mới).",
-                MessageType.None);
-        }
+        return 0;
     }
 
-    /// <summary>
-    /// Convert TileType[] map cũ sang TileRef[] tileRefMap.
-    /// Logic/Walkable tiles (Lotus/Grass/Water) → cần pack có tile tương ứng.
-    /// Tile "Empty" → TileRef.Empty.
-    /// </summary>
-    private void ConvertToTileRef(LevelData level)
-    {
-        if (level.map == null || level.map.Length == 0)
-        {
-            Debug.LogWarning("[Convert] Map cũ trống, không có gì để convert.");
-            return;
-        }
 
-        if (level.localPacks == null || level.localPacks.Length == 0)
-        {
-            Debug.LogWarning("[Convert] Cần ít nhất 1 TilePack trong 'Local Packs' để map tile sang pack.");
-            return;
-        }
-
-        Undo.RecordObject(level, "Convert to TileRef");
-        level.tileRefMap = new TileRef[level.map.Length];
-
-        // Build reverse lookup: TileType name → (packName, tileId) từ localPacks
-        var legacyMap = new Dictionary<string, (string pack, string id)>();
-        foreach (var pack in level.localPacks)
-        {
-            if (pack == null) continue;
-            pack.BuildCache();
-            foreach (var entry in pack.entries)
-            {
-                if (entry == null) continue;
-                // Tên entry khớp với tên TileType → map được
-                string key = entry.id.ToLower();
-                if (!legacyMap.ContainsKey(key))
-                    legacyMap[key] = (pack.packName, entry.id);
-            }
-        }
-
-        int mapped = 0, unmapped = 0;
-        for (int i = 0; i < level.map.Length; i++)
-        {
-            TileType t = level.map[i];
-            if (t == TileType.Empty)
-            {
-                level.tileRefMap[i] = TileRef.Empty;
-                continue;
-            }
-
-            string key = t.ToString().ToLower();
-            if (legacyMap.TryGetValue(key, out var match))
-            {
-                level.tileRefMap[i] = new TileRef(match.pack, match.id);
-                mapped++;
-            }
-            else
-            {
-                // Không tìm được pack tương ứng → để trống và warn
-                level.tileRefMap[i] = TileRef.Empty;
-                unmapped++;
-            }
-        }
-
-        EditorUtility.SetDirty(level);
         Debug.Log($"[Convert] ✅ Xong. Mapped: {mapped}, Unmapped (→ Empty): {unmapped}");
         Debug.Log("[Convert] Kiểm tra các ô bị unmapped và gán thủ công trong Editor nếu cần.");
     }
@@ -378,10 +362,7 @@ public class LevelDataEditor : Editor
                 LogicTileType logic = level.GetLogic(x, y);
                 if (logic != LogicTileType.Empty) continue; // đã có tile
 
-                if (level.UsesTileRefFormat)
-                    level.SetRef(x, y, waterRef);
-                else
-                    level.Set(x, y, TileType.Water);
+                level.SetRef(x, y, waterRef);
             }
         }
 
@@ -414,23 +395,15 @@ public class LevelDataEditor : Editor
         var allLotus = new HashSet<Vector2Int>(path);
         allLotus.Add(level.startTile);
 
-        if (level.UsesTileRefFormat)
+        TileRef lotusRef = FindLotusRef(level);
+        if (lotusRef.IsEmpty)
         {
-            TileRef lotusRef = FindLotusRef(level);
-            if (lotusRef.IsEmpty)
-            {
-                Debug.LogWarning("[GenerateTour] Không tìm thấy Lotus TileRef trong localPacks. "
-                    + "Thêm entry có logicType=Lotus vào một pack trong 'Local Packs'.");
-                return;
-            }
-            foreach (var pos in allLotus)
-                level.SetRef(pos.x, pos.y, lotusRef);
+            Debug.LogWarning("[GenerateTour] Không tìm thấy Lotus TileRef trong localPacks. "
+                + "Thêm entry có logicType=Lotus vào một pack trong 'Local Packs'.");
+            return;
         }
-        else
-        {
-            foreach (var pos in allLotus)
-                level.Set(pos.x, pos.y, TileType.Lotus);
-        }
+        foreach (var pos in allLotus)
+            level.SetRef(pos.x, pos.y, lotusRef);
     }
 
     /// <summary>Tìm TileRef đầu tiên có logicType == Lotus trong localPacks.</summary>
@@ -463,13 +436,8 @@ public class LevelDataEditor : Editor
 
     void DrawGrid(LevelData level)
     {
-        bool usesNewFormat = level.UsesTileRefFormat;
-
-        if (usesNewFormat && (level.tileRefMap == null || level.tileRefMap.Length != level.width * level.height))
+        if (level.tileRefMap == null || level.tileRefMap.Length != level.width * level.height)
             level.tileRefMap = new TileRef[level.width * level.height];
-
-        if (!usesNewFormat && (level.map == null || level.map.Length != level.width * level.height))
-            level.map = new TileType[level.width * level.height];
 
         Event e = Event.current;
 
@@ -482,19 +450,9 @@ public class LevelDataEditor : Editor
                 Rect rect = GUILayoutUtility.GetRect(cellSize, cellSize);
 
                 // ── Lấy màu nền tile ──
-                Color bgColor;
-                string labelText = "";
-                if (usesNewFormat)
-                {
-                    TileRef tref = level.GetRef(x, y);
-                    bgColor = ResolveTileColor(tref, level);
-                    if (!tref.IsEmpty) labelText = tref.tileId;
-                }
-                else
-                {
-                    TileType tile = level.Get(x, y);
-                    bgColor = GetLegacyColor(tile);
-                }
+                TileRef tref = level.GetRef(x, y);
+                Color bgColor = ResolveTileColor(tref, level);
+                string labelText = tref.IsEmpty ? "" : tref.tileId;
 
                 EditorGUI.DrawRect(rect, bgColor);
 
@@ -596,23 +554,13 @@ public class LevelDataEditor : Editor
                 break;
 
             case PaintMode.Grass:
-                // Paint Grass walkable: format mới dùng TileRef từ pack;
-                // format cũ set TileType.Grass
-                if (level.UsesTileRefFormat)
-                {
-                    TileRef grassRef = FindFirstGrassInPacks(level);
-                    level.SetRef(x, y, grassRef.IsEmpty ? TileRef.Empty : grassRef);
-                }
-                else
-                {
-                    level.Set(x, y, TileType.Grass);
-                }
+                TileRef grassRef = FindFirstGrassInPacks(level);
+                level.SetRef(x, y, grassRef.IsEmpty ? TileRef.Empty : grassRef);
                 break;
 
             case PaintMode.TilePack:
                 if (!string.IsNullOrEmpty(selectedPackName) && !string.IsNullOrEmpty(selectedTileId))
                 {
-                    // Đảm bảo tileRefMap được khởi tạo
                     if (level.tileRefMap == null || level.tileRefMap.Length != level.width * level.height)
                         level.tileRefMap = new TileRef[level.width * level.height];
                     level.SetRef(x, y, new TileRef(selectedPackName, selectedTileId));
@@ -623,10 +571,7 @@ public class LevelDataEditor : Editor
 
     private void EraseTile(LevelData level, int x, int y)
     {
-        if (level.UsesTileRefFormat)
-            level.SetRef(x, y, TileRef.Empty);
-        else
-            level.Set(x, y, TileType.Empty);
+        level.SetRef(x, y, TileRef.Empty);
     }
 
     // ─────────────────────────────────────────────────────
@@ -643,7 +588,12 @@ public class LevelDataEditor : Editor
             {
                 if (pack == null || pack.packName != tref.packName) continue;
                 var entry = pack.Get(tref.tileId);
-                if (entry != null) return entry.editorColor;
+                if (entry != null)
+                {
+                    Color col = entry.editorColor;
+                    if (col.a == 0f) col.a = 1f; // Force opaque if alpha is 0
+                    return col;
+                }
             }
         }
 
@@ -685,63 +635,5 @@ public class LevelDataEditor : Editor
         return FindFirstLotusInPacks(level);
     }
 
-    private Color GetLegacyColor(TileType tile)
-    {
-        switch (tile)
-        {
-            case TileType.Empty:   return new Color(0.08f, 0.08f, 0.08f);
-            case TileType.Lotus:   return new Color(0.4f, 1f, 0.6f);
-            case TileType.Water:   return new Color(0.2f, 0.5f, 0.95f);
-            case TileType.Grass:
-            case TileType.Grass2:
-            case TileType.SmallGrass:
-            case TileType.SmallGrass2:
-            case TileType.GrassLeaf:
-            case TileType.TopLeftGrass:
-            case TileType.TopStoneGrass:
-            case TileType.MudWithGrass:
-                return new Color(0.2f, 0.7f, 0.3f);
-            case TileType.Tree:
-            case TileType.TallTree:
-            case TileType.LargeTree:
-            case TileType.Bush:
-            case TileType.Stump:
-                return new Color(0.1f, 0.45f, 0.2f);
-            case TileType.Wave:
-            case TileType.WaterFall:
-            case TileType.WaterFallBottom:
-            case TileType.StoneWater:
-            case TileType.FishingBobber:
-            case TileType.Jetty:
-            case TileType.LotusFlower:
-            case TileType.SmallLeaf:
-                return new Color(0.3f, 0.6f, 0.95f);
-            case TileType.SmallStone:
-            case TileType.SmallStone2:
-            case TileType.StoneGrass:
-            case TileType.Cattail:
-            case TileType.Reed:
-            case TileType.BlueFlower:
-            case TileType.RedMushroom:
-            case TileType.BrownMushroom:
-            case TileType.Pumkin:
-                return new Color(0.7f, 0.7f, 0.7f);
-            case TileType.PathVertical:
-            case TileType.PathHorizontal:
-            case TileType.PathCornerBL:
-            case TileType.PathCornerBR:
-            case TileType.PathCornerTL:
-            case TileType.PathCornerTR:
-            case TileType.PathIntersection:
-            case TileType.PathTJunctionUp:
-            case TileType.PathTJunctionDown:
-            case TileType.PathTJunctionLeft:
-            case TileType.PathTJunctionRight:
-            case TileType.RuinedPath:
-                return new Color(0.6f, 0.4f, 0.2f);
-            default:
-                return new Color(0.8f, 0.3f, 0.9f);
-        }
-    }
 }
 #endif

@@ -29,12 +29,7 @@ public class LevelData : ScriptableObject
     [Tooltip("Danh sách các TilePack được sử dụng trong level này (gợi ý cho Editor).")]
     public TilePack[] localPacks;
 
-    // ──────────────────────────────────────────────────
-    //  FORMAT CŨ — giữ lại backward compat
-    // ──────────────────────────────────────────────────
-    [Header("Map — Legacy TileType Format (Old)")]
-    [Tooltip("Map dữ liệu cũ dùng TileType enum. Giữ lại để level cũ không bị hỏng.")]
-    public TileType[] map;
+
 
     // ──────────────────────────────────────────────────
     //  Thông tin chung
@@ -46,13 +41,18 @@ public class LevelData : ScriptableObject
     public Difficulty difficulty;
     public Vector2Int[] solutionPath;
 
-    // ──────────────────────────────────────────────────
-    //  Helpers — Format MỚI (TileRef)
-    // ──────────────────────────────────────────────────
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        // Khởi tạo mặc định cho level mới tạo
+        if (width == 0) width = 8;
+        if (height == 0) height = 8;
 
-    /// <summary>True nếu level đã migrate sang TileRef format.</summary>
-    public bool UsesTileRefFormat =>
-        tileRefMap != null && tileRefMap.Length == width * height;
+        if (tileRefMap == null || tileRefMap.Length == 0)
+        {
+            tileRefMap = new TileRef[width * height];    // ──────────────────────────────────────────────────
+    //  Helpers — TileRef Map Methods
+    // ──────────────────────────────────────────────────
 
     public TileRef GetRef(int x, int y)
     {
@@ -69,65 +69,24 @@ public class LevelData : ScriptableObject
 
     /// <summary>
     /// Trả về LogicTileType của ô (x,y) — dùng cho solver, pathfinding.
-    /// Ưu tiên tileRefMap nếu có, fallback về map cũ.
     /// </summary>
     public LogicTileType GetLogic(int x, int y)
     {
-        if (UsesTileRefFormat)
-        {
-            // Đọc từ TileRef — lấy logicType từ TilePack qua localPacks hint
-            // Nếu không tìm được pack, fallback: empty nếu IsEmpty
-            TileRef tref = GetRef(x, y);
-            if (tref.IsEmpty) return LogicTileType.Empty;
+        TileRef tref = GetRef(x, y);
+        if (tref.IsEmpty) return LogicTileType.Empty;
 
-            // Tra trong localPacks để lấy logicType
-            if (localPacks != null)
+        // Tra trong localPacks để lấy logicType
+        if (localPacks != null)
+        {
+            foreach (var pack in localPacks)
             {
-                foreach (var pack in localPacks)
-                {
-                    if (pack == null || pack.packName != tref.packName) continue;
-                    var entry = pack.Get(tref.tileId);
-                    if (entry != null) return entry.logicType;
-                }
+                if (pack == null || pack.packName != tref.packName) continue;
+                var entry = pack.Get(tref.tileId);
+                if (entry != null) return entry.logicType;
             }
-            // Không tìm được pack → giả định là Grass (không walkable)
-            return LogicTileType.Grass;
         }
-
-        // Fallback: dùng map cũ
-        if (map == null || map.Length == 0) return LogicTileType.Empty;
-        return LegacyToLogic(map[y * width + x]);
-    }
-
-    /// <summary>Convert TileType cũ sang LogicTileType mới.</summary>
-    public static LogicTileType LegacyToLogic(TileType t)
-    {
-        switch (t)
-        {
-            case TileType.Empty:  return LogicTileType.Empty;
-            case TileType.Lotus:  return LogicTileType.Lotus;
-            case TileType.Water:  return LogicTileType.Water;
-            case TileType.Grass:  return LogicTileType.Grass;
-            // Mọi tile decoration/obstacle khác → Grass (không walkable)
-            default:              return LogicTileType.Grass;
-        }
-    }
-
-    // ──────────────────────────────────────────────────
-    //  Helpers — Format CŨ (legacy, giữ để không break)
-    // ──────────────────────────────────────────────────
-
-    public TileType Get(int x, int y)
-    {
-        if (map == null || map.Length == 0) return TileType.Empty;
-        return map[y * width + x];
-    }
-
-    public void Set(int x, int y, TileType value)
-    {
-        if (map == null || map.Length != width * height)
-            map = new TileType[width * height];
-        map[y * width + x] = value;
+        // Không tìm được pack – giả định là Grass (không walkable)
+        return LogicTileType.Grass;
     }
 
     // ──────────────────────────────────────────────────
@@ -136,20 +95,10 @@ public class LevelData : ScriptableObject
 
     public void Resize(int newW, int newH)
     {
-        var oldMap = map;
         int oldW = width, oldH = height;
 
         width = newW;
         height = newH;
-
-        // Resize old map
-        map = new TileType[newW * newH];
-        if (oldMap != null)
-        {
-            for (int y = 0; y < Mathf.Min(oldH, newH); y++)
-                for (int x = 0; x < Mathf.Min(oldW, newW); x++)
-                    map[y * newW + x] = oldMap[y * oldW + x];
-        }
 
         // Resize tileRefMap nếu có
         if (tileRefMap != null && tileRefMap.Length > 0)
@@ -159,6 +108,10 @@ public class LevelData : ScriptableObject
             for (int y = 0; y < Mathf.Min(oldH, newH); y++)
                 for (int x = 0; x < Mathf.Min(oldW, newW); x++)
                     tileRefMap[y * newW + x] = oldRef[y * oldW + x];
+        }
+        else
+        {
+            tileRefMap = new TileRef[newW * newH];
         }
     }
 }

@@ -50,13 +50,13 @@ public class TilePack : ScriptableObject
     // ──────────────────────────────────────────────────
     //  Runtime lookup
     // ──────────────────────────────────────────────────
-    private Dictionary<string, TilePackEntry> _cache;
-    private bool _built = false;
+    [System.NonSerialized] private Dictionary<string, TilePackEntry> _cache;
+    [System.NonSerialized] private bool _built = false;
 
     /// <summary>Gọi lúc Awake của GameController để xây cache.</summary>
     public void BuildCache()
     {
-        if (_built) return;
+        if (_built && _cache != null) return;
         _cache = new Dictionary<string, TilePackEntry>();
         foreach (var e in entries)
         {
@@ -72,7 +72,7 @@ public class TilePack : ScriptableObject
     /// <summary>Trả về TilePackEntry theo id. Null nếu không tìm thấy.</summary>
     public TilePackEntry Get(string id)
     {
-        if (!_built) BuildCache();
+        if (!_built || _cache == null) BuildCache();
         return _cache.TryGetValue(id, out var entry) ? entry : null;
     }
 

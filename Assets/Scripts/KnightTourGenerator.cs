@@ -16,27 +16,11 @@ public class KnightTourGenerator
     public static List<Vector2Int> Generate(LevelData level)
     {
         // --- Bước 1: Reset Lotus cũ → Water (clear slate) ---
-        // Hỗ trợ cả 2 format: TileRef (mới) và TileType (cũ)
-        if (level.UsesTileRefFormat)
-        {
-            // Format mới: dùng GetLogic để detect Lotus, SetRef để đặt Water
-            // (Water TileRef sẽ được tìm từ localPacks nếu có, nếu không → Empty)
-            TileRef waterRef = FindTileRefByLogic(level, LogicTileType.Water);
-            for (int y = 0; y < level.height; y++)
-                for (int x = 0; x < level.width; x++)
-                    if (level.GetLogic(x, y) == LogicTileType.Lotus)
-                        level.SetRef(x, y, waterRef); // reset Lotus → Water/Empty
-        }
-        else
-        {
-            // Format cũ: reset trực tiếp qua TileType array
-            for (int i = 0; i < level.map.Length; i++)
-            {
-                TileType t = level.map[i];
-                if (t == TileType.Lotus || t == TileType.LotusFlower || t == TileType.SmallLeaf)
-                    level.map[i] = TileType.Water;
-            }
-        }
+        TileRef waterRef = FindTileRefByLogic(level, LogicTileType.Water);
+        for (int y = 0; y < level.height; y++)
+            for (int x = 0; x < level.width; x++)
+                if (level.GetLogic(x, y) == LogicTileType.Lotus)
+                    level.SetRef(x, y, waterRef); // reset Lotus → Water/Empty
 
         // --- Buoc 2: Build graph ---
         var graph = KnightGraphBuilder.BuildGraph(level);
@@ -113,24 +97,13 @@ public class KnightTourGenerator
         }
 
         // --- Buoc 4: Chi gan Lotus cho cac o TRONG finalPath (chi Water tiles) ---
-        if (level.UsesTileRefFormat)
-        {
-            TileRef lotusRef = FindTileRefByLogic(level, LogicTileType.Lotus);
-            if (!lotusRef.IsEmpty)
-            {
-                foreach (var pos in finalPath)
-                {
-                    if (level.GetLogic(pos.x, pos.y) == LogicTileType.Water)
-                        level.SetRef(pos.x, pos.y, lotusRef);
-                }
-            }
-        }
-        else
+        TileRef lotusRef = FindTileRefByLogic(level, LogicTileType.Lotus);
+        if (!lotusRef.IsEmpty)
         {
             foreach (var pos in finalPath)
             {
-                if (level.Get(pos.x, pos.y) == TileType.Water)
-                    level.Set(pos.x, pos.y, TileType.Lotus);
+                if (level.GetLogic(pos.x, pos.y) == LogicTileType.Water)
+                    level.SetRef(pos.x, pos.y, lotusRef);
             }
         }
 
