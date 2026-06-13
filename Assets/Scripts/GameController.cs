@@ -247,14 +247,44 @@ public class GameController : MonoBehaviour
 
         MoveRecord last = moveHistory.Pop();
 
+        // Khôi phục logic và re-render sprite Lotus tại ô đó
         SetLogicTile(last.to, LogicTileType.Lotus);
+        RestoreTileVisual(last.to);
         visitedTiles.Remove(last.to);
 
         SetLogicTile(last.from, LogicTileType.Lotus);
+        RestoreTileVisual(last.from);
         visitedTiles.Remove(last.from);
 
         frogInstance.ForceMove(last.from);
         HighlightValidMoves(last.from);
+    }
+
+    /// <summary>
+    /// Vẽ lại sprite gốc của tile tại vị trí (x,y) từ dữ liệu map runtime.
+    /// Dùng khi Undo: sau khi reset logic về Lotus, cần hiện lại sprite Lotus.
+    /// </summary>
+    private void RestoreTileVisual(Vector2Int tile)
+    {
+        int index = tile.y * currentLevel.width + tile.x;
+        var cell = new Vector3Int(tile.x, tile.y, 0);
+
+        if (runtimeRefMap != null)
+        {
+            // Format mới: lấy TileRef từ snapshot ban đầu
+            // runtimeRefMap không thay đổi khi frog di chuyển → vẫn chứa ref gốc
+            TileRef tref = runtimeRefMap[index];
+            TileBase tb = ResolveTileBase(tref);
+            lotusTilemap.SetTile(cell, tb);
+        }
+        else if (runtimeMap != null)
+        {
+            // Format cũ: dùng TileType trong runtimeMap (vừa được set lại)
+            TileType t = runtimeMap[index];
+            if (tileSet != null && tileSet._lookup != null &&
+                tileSet._lookup.TryGetValue(t, out var tb))
+                lotusTilemap.SetTile(cell, tb);
+        }
     }
 
     private void DrawMap()
@@ -458,13 +488,57 @@ public class GameController : MonoBehaviour
 
         var cell = new Vector3Int(tile.x, tile.y, 0);
 
-        if (newLogic == LogicTileType.Empty || newLogic == LogicTileType.Water)
+        if (newLogic == LogicTileType.Empty)
         {
+            // Empty → xóa trắng hoàn toàn
             lotusTilemap.SetTile(cell, null);
             if (runtimeMap != null)
-                runtimeMap[index] = newLogic == LogicTileType.Water ? TileType.Water : TileType.Empty;
+                runtimeMap[index] = TileType.Empty;
         }
-        // Lotus / Grass → giữ nguyên visual (tile đã được draw lúc DrawMap)
+        else if (newLogic == LogicTileType.Water)
+        {
+            // Water → hiện sprite nước (frog vừa nhảy qua làm lót biến thành nước)
+            TileBase waterTile = GetWaterTileBase(index);
+            lotusTilemap.SetTile(cell, waterTile);
+            if (runtimeMap != null)
+                runtimeMap[index] = TileType.Water;
+        }
+        // Lotus / Grass → giữ nguyên visual hiện tại (tile đã được draw lúc DrawMap)
+    }
+
+    /// <summary>
+    /// Lấy sprite Water để hiện khi frog nhảy qua ô.
+    /// Tìm trong TilePack (entry có logicType == Water), fallback sang tileSet legacy.
+    /// </summary>
+    private TileBase GetWaterTileBase(int mapIndex)
+    {
+        // Tìm trong pack cướt runtime
+        if (_packLookup != null)
+        {
+            // Ưu tiên: nếu ô đó đang là TileRef, lấy pack tương ứng và tìm entry Water
+            if (runtimeRefMap != null && mapIndex < runtimeRefMap.Length)
+            {
+                var tref = runtimeRefMap[mapIndex];
+                if (!tref.IsEmpty && _packLookup.TryGetValue(tref.packName, out var originPack))
+                {
+                    // Tìm entry đầu tiên có logicType == Water trong cùng pack
+                    foreach (var e in originPack.entries)
+                        if (e != null && e.logicType == LogicTileType.Water && e.tile != null)
+                            return e.tile;
+                }
+            }
+            // Fallback: tìm trong bất kỳ pack nào có Water entry
+            foreach (var pack in _packLookup.Values)
+                foreach (var e in pack.entries)
+                    if (e != null && e.logicType == LogicTileType.Water && e.tile != null)
+                        return e.tile;
+        }
+        // Fallback cuối: legacy tileSet
+        if (tileSet != null && tileSet._lookup != null &&
+            tileSet._lookup.TryGetValue(TileType.Water, out var legacyWater))
+            return legacyWater;
+
+        return null; // Không tìm được → ô sẽ trống
     }
 
     /// <summary>Backward compat — dùng TileType cũ.</summary>

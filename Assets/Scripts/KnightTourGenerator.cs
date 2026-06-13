@@ -15,12 +15,27 @@ public class KnightTourGenerator
 
     public static List<Vector2Int> Generate(LevelData level)
     {
-        // --- Buoc 1: Reset Lotus cu -> Water de clear slate ---
-        for (int i = 0; i < level.map.Length; i++)
+        // --- Bước 1: Reset Lotus cũ → Water (clear slate) ---
+        // Hỗ trợ cả 2 format: TileRef (mới) và TileType (cũ)
+        if (level.UsesTileRefFormat)
         {
-            TileType t = level.map[i];
-            if (t == TileType.Lotus || t == TileType.LotusFlower || t == TileType.SmallLeaf)
-                level.map[i] = TileType.Water;
+            // Format mới: dùng GetLogic để detect Lotus, SetRef để đặt Water
+            // (Water TileRef sẽ được tìm từ localPacks nếu có, nếu không → Empty)
+            TileRef waterRef = FindTileRefByLogic(level, LogicTileType.Water);
+            for (int y = 0; y < level.height; y++)
+                for (int x = 0; x < level.width; x++)
+                    if (level.GetLogic(x, y) == LogicTileType.Lotus)
+                        level.SetRef(x, y, waterRef); // reset Lotus → Water/Empty
+        }
+        else
+        {
+            // Format cũ: reset trực tiếp qua TileType array
+            for (int i = 0; i < level.map.Length; i++)
+            {
+                TileType t = level.map[i];
+                if (t == TileType.Lotus || t == TileType.LotusFlower || t == TileType.SmallLeaf)
+                    level.map[i] = TileType.Water;
+            }
         }
 
         // --- Buoc 2: Build graph ---
@@ -98,10 +113,25 @@ public class KnightTourGenerator
         }
 
         // --- Buoc 4: Chi gan Lotus cho cac o TRONG finalPath (chi Water tiles) ---
-        foreach (var pos in finalPath)
+        if (level.UsesTileRefFormat)
         {
-            if (level.Get(pos.x, pos.y) == TileType.Water)
-                level.Set(pos.x, pos.y, TileType.Lotus);
+            TileRef lotusRef = FindTileRefByLogic(level, LogicTileType.Lotus);
+            if (!lotusRef.IsEmpty)
+            {
+                foreach (var pos in finalPath)
+                {
+                    if (level.GetLogic(pos.x, pos.y) == LogicTileType.Water)
+                        level.SetRef(pos.x, pos.y, lotusRef);
+                }
+            }
+        }
+        else
+        {
+            foreach (var pos in finalPath)
+            {
+                if (level.Get(pos.x, pos.y) == TileType.Water)
+                    level.Set(pos.x, pos.y, TileType.Lotus);
+            }
         }
 
         Debug.Log($"[KnightTourGenerator] Generated path of length {finalPath.Count} / target {targetPathLength}");
@@ -193,5 +223,24 @@ public class KnightTourGenerator
             list[k] = list[n];
             list[n] = value;
         }
+    }
+
+    /// <summary>
+    /// Tìm TileRef Water đầu tiên trong localPacks của level.
+    /// Dùng để reset Lotus → Water khi Generate() clear slate.
+    /// Trả về TileRef.Empty nếu không tìm thấy (ô sẽ về Empty).
+    /// </summary>
+    private static TileRef FindTileRefByLogic(LevelData level, LogicTileType targetLogic)
+    {
+        if (level.localPacks == null) return TileRef.Empty;
+        foreach (var pack in level.localPacks)
+        {
+            if (pack == null) continue;
+            pack.BuildCache();
+            foreach (var entry in pack.entries)
+                if (entry != null && entry.logicType == targetLogic && !string.IsNullOrEmpty(entry.id))
+                    return new TileRef(pack.packName, entry.id);
+        }
+        return TileRef.Empty;
     }
 }

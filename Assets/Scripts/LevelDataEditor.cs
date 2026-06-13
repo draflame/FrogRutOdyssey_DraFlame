@@ -8,13 +8,13 @@ public class LevelDataEditor : Editor
 {
     public enum PaintMode
     {
-        Lotus,      // Vẽ tile Lotus (walkable cơ bản — dùng TileRef từ pack)
+        Grass,      // Vẽ tile Grass (walkable — lót chính mà frog cần đi qua)
         Empty,      // Xóa tile
         Start,      // Đặt vị trí bắt đầu
         TilePack    // Chọn tile từ TilePack (format mới)
     }
 
-    private PaintMode currentMode = PaintMode.Lotus;
+    private PaintMode currentMode = PaintMode.Grass;
     private int cellSize = 28;
 
     // ── TilePack selection state ──
@@ -38,7 +38,7 @@ public class LevelDataEditor : Editor
         GUILayout.Label("🗺 LEVEL EDITOR", EditorStyles.boldLabel);
 
         // ── Mode toolbar ──
-        string[] modeLabels = { "Lotus", "Empty", "Start", "TilePack" };
+        string[] modeLabels = { "Grass", "Empty", "Start", "TilePack" };
         currentMode = (PaintMode)GUILayout.Toolbar((int)currentMode, modeLabels);
 
         // ── TilePack brush picker ──
@@ -91,8 +91,15 @@ public class LevelDataEditor : Editor
         {
             if (LevelValidator.IsStartValid(level))
             {
+                Undo.RecordObject(level, "Generate Tour");
                 var path = KnightTourGenerator.Generate(level);
                 level.solutionPath = path.ToArray();
+
+                // Đổi các tile trong path thành Lotus (kể cả start)
+                ApplyPathAsLotus(level, path);
+
+                EditorUtility.SetDirty(level);
+                Debug.Log($"[GenerateTour] Path length: {path.Count}. Đã gán Lotus cho toàn bộ path.");
             }
             else
             {
@@ -318,18 +325,140 @@ public class LevelDataEditor : Editor
     void FillInterior(LevelData level)
     {
         Undo.RecordObject(level, "Fill Interior");
+
+        // Thuật toán flood-fill từ biên (exterior) → những ô không đủ rộng là interior
+        // Bước 1: Mark tất cả ô kết nối với biên (exterior flood-fill)
+        bool[,] isExterior = new bool[level.width, level.height];
+        var queue = new Queue<Vector2Int>();
+
+        // Seed: tất cả ô rộng (đưa vào Empty) nằm TRÊN BIÊN
+        for (int x = 0; x < level.width; x++)
+        {
+            TrySeedExterior(level, x, 0, isExterior, queue);
+            TrySeedExterior(level, x, level.height - 1, isExterior, queue);
+        }
+        for (int y = 1; y < level.height - 1; y++)
+        {
+            TrySeedExterior(level, 0, y, isExterior, queue);
+            TrySeedExterior(level, level.width - 1, y, isExterior, queue);
+        }
+
+        // Bước 2: BFS flood-fill ra ngoài
+        int[] dx = { 1, -1, 0, 0 };
+        int[] dy = { 0, 0, 1, -1 };
+
+        while (queue.Count > 0)
+        {
+            var cur = queue.Dequeue();
+            for (int d = 0; d < 4; d++)
+            {
+                int nx = cur.x + dx[d];
+                int ny = cur.y + dy[d];
+                if (nx < 0 || ny < 0 || nx >= level.width || ny >= level.height) continue;
+                if (isExterior[nx, ny]) continue;
+
+                LogicTileType logic = level.GetLogic(nx, ny);
+                // Chỉ spread qua ô rộng (Empty) — không vượt qua Grass/Water/Lotus
+                if (logic != LogicTileType.Empty) continue;
+
+                isExterior[nx, ny] = true;
+                queue.Enqueue(new Vector2Int(nx, ny));
+            }
+        }
+
+        // Bước 3: Fill Water vào tất cả ô Interior (Empty + không phải exterior)
+        TileRef waterRef = FindWaterTileRef(level);
+
+        for (int y = 0; y < level.height; y++)
+        {
+            for (int x = 0; x < level.width; x++)
+            {
+                if (isExterior[x, y]) continue;
+
+                LogicTileType logic = level.GetLogic(x, y);
+                if (logic != LogicTileType.Empty) continue; // đã có tile
+
+                if (level.UsesTileRefFormat)
+                    level.SetRef(x, y, waterRef);
+                else
+                    level.Set(x, y, TileType.Water);
+            }
+        }
+
+        Debug.Log("[FillInterior] Đã fill Water vào phần interior của map.");
+    }
+
+    /// <summary>Seed một ô vào exterior flood-fill nếu nó là Empty.</summary>
+    private void TrySeedExterior(LevelData level, int x, int y, bool[,] isExterior, Queue<Vector2Int> queue)
+    {
+        if (isExterior[x, y]) return;
+        LogicTileType logic = level.GetLogic(x, y);
+        if (logic != LogicTileType.Empty) return; // ô Grass/Water/Lotus làm biên — không seed
+        isExterior[x, y] = true;
+        queue.Enqueue(new Vector2Int(x, y));
+    }
+
+    // ─────────────────────────────────────────────────────
+    //  Apply Path as Lotus
+    // ─────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Gán Lotus cho tất cả tile trong path (kể cả start tile).
+    /// Hỗ trợ cả format cũ (TileType) và mới (TileRef).
+    /// </summary>
+    private void ApplyPathAsLotus(LevelData level, List<Vector2Int> path)
+    {
+        if (path == null || path.Count == 0) return;
+
+        // Đảm bảo start tile cũng là Lotus
+        var allLotus = new HashSet<Vector2Int>(path);
+        allLotus.Add(level.startTile);
+
         if (level.UsesTileRefFormat)
         {
-            // TODO: fill với tile được chọn từ pack
-            Debug.Log("[FillInterior] Chưa hỗ trợ cho TileRef format — sẽ phát triển sau.");
+            TileRef lotusRef = FindLotusRef(level);
+            if (lotusRef.IsEmpty)
+            {
+                Debug.LogWarning("[GenerateTour] Không tìm thấy Lotus TileRef trong localPacks. "
+                    + "Thêm entry có logicType=Lotus vào một pack trong 'Local Packs'.");
+                return;
+            }
+            foreach (var pos in allLotus)
+                level.SetRef(pos.x, pos.y, lotusRef);
         }
         else
         {
-            for (int y = 1; y < level.height - 1; y++)
-                for (int x = 1; x < level.width - 1; x++)
-                    if (level.Get(x, y) == TileType.Empty)
-                        level.Set(x, y, TileType.Water);
+            foreach (var pos in allLotus)
+                level.Set(pos.x, pos.y, TileType.Lotus);
         }
+    }
+
+    /// <summary>Tìm TileRef đầu tiên có logicType == Lotus trong localPacks.</summary>
+    private TileRef FindLotusRef(LevelData level)
+    {
+        if (level.localPacks == null) return TileRef.Empty;
+        foreach (var pack in level.localPacks)
+        {
+            if (pack == null) continue;
+            foreach (var entry in pack.entries)
+                if (entry != null && entry.logicType == LogicTileType.Lotus && !string.IsNullOrEmpty(entry.id))
+                    return new TileRef(pack.packName, entry.id);
+        }
+        return TileRef.Empty;
+    }
+
+    /// <summary>Tìm TileRef đầu tiên có logicType == Water trong localPacks (dùng cho FillInterior).</summary>
+    private TileRef FindWaterTileRef(LevelData level)
+    {
+        if (level.localPacks == null) return TileRef.Empty;
+        foreach (var pack in level.localPacks)
+        {
+            if (pack == null) continue;
+            foreach (var entry in pack.entries)
+                if (entry != null && entry.logicType == LogicTileType.Water && !string.IsNullOrEmpty(entry.id))
+                    return new TileRef(pack.packName, entry.id);
+        }
+        return TileRef.Empty;
     }
 
     void DrawGrid(LevelData level)
@@ -466,18 +595,17 @@ public class LevelDataEditor : Editor
                 EraseTile(level, x, y);
                 break;
 
-            case PaintMode.Lotus:
-                // Paint Lotus: nếu format mới, dùng TileRef từ pack "Lotus" tile;
-                // nếu format cũ, set TileType.Lotus
+            case PaintMode.Grass:
+                // Paint Grass walkable: format mới dùng TileRef từ pack;
+                // format cũ set TileType.Grass
                 if (level.UsesTileRefFormat)
                 {
-                    // Tìm tile có logicType = Lotus trong localPacks
-                    TileRef lotusRef = FindFirstLotusInPacks(level);
-                    level.SetRef(x, y, lotusRef.IsEmpty ? TileRef.Empty : lotusRef);
+                    TileRef grassRef = FindFirstGrassInPacks(level);
+                    level.SetRef(x, y, grassRef.IsEmpty ? TileRef.Empty : grassRef);
                 }
                 else
                 {
-                    level.Set(x, y, TileType.Lotus);
+                    level.Set(x, y, TileType.Grass);
                 }
                 break;
 
@@ -536,6 +664,25 @@ public class LevelDataEditor : Editor
             }
         }
         return TileRef.Empty;
+    }
+
+    /// <summary>
+    /// Tìm tile đầu tiên có logicType == Grass (hoặc Lotus) trong localPacks.
+    /// Dùng cho PaintMode.Grass — vẽ tile nền đất chính của map.
+    /// </summary>
+    private TileRef FindFirstGrassInPacks(LevelData level)
+    {
+        if (level.localPacks == null) return TileRef.Empty;
+        // Ưu tiên tìm Grass trước
+        foreach (var pack in level.localPacks)
+        {
+            if (pack == null) continue;
+            foreach (var entry in pack.entries)
+                if (entry != null && entry.logicType == LogicTileType.Grass)
+                    return new TileRef(pack.packName, entry.id);
+        }
+        // Fallback: Lotus cũng là walkable
+        return FindFirstLotusInPacks(level);
     }
 
     private Color GetLegacyColor(TileType tile)

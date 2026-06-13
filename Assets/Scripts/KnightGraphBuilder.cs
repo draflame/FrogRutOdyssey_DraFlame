@@ -25,15 +25,15 @@ public class KnightGraphBuilder
     {
         var graph = new Dictionary<Vector2Int, KnightNode>();
 
-        // L?c t?t c? các ô
+        // L?c t?t c? cï¿½c ï¿½
         for (int y = 0; y < level.height; y++)
         {
             for (int x = 0; x < level.width; x++)
             {
-                TileType tile = level.Get(x, y);
+                LogicTileType logic = level.GetLogic(x, y);
                 bool isStartTile = (level.startTile.x == x && level.startTile.y == y);
 
-                if (tile == TileType.Water || tile == TileType.Lotus || (isStartTile && tile == TileType.Grass))
+                if (logic == LogicTileType.Water || logic == LogicTileType.Lotus || (isStartTile && logic == LogicTileType.Grass))
                 {
                     Vector2Int pos = new Vector2Int(x, y);
                     graph[pos] = new KnightNode { position = pos };
@@ -41,7 +41,7 @@ public class KnightGraphBuilder
             }
         }
 
-        // T?o c?nh (edges) gi?a các ô Grass d?a vào n??c ?i Knight
+        // T?o c?nh (edges) gi?a cï¿½c ï¿½ Grass d?a vï¿½o n??c ?i Knight
         foreach (var kvp in graph)
         {
             Vector2Int pos = kvp.Key;
