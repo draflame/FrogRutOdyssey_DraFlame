@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb85282e72152864b8f54b2b758800cf, type: 3}
-  m_Name: LevelData
+  m_Name: Level12
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   width: 8
   height: 8
@@ -147,7 +147,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19b67806559373548bb5f8313242c8b4, type: 2}
   - {fileID: 11400000, guid: bb3c7066147bc314aa8e2e36f8c8befc, type: 2}
   - {fileID: 11400000, guid: 04abf23a1a827be4280002f40bf0771b, type: 2}
-  map: 
   startTile: {x: 0, y: 0}
   difficulty: 0
   solutionPath: []

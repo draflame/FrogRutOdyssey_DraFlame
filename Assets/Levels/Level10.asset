@@ -14,5 +14,190 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   width: 9
   height: 9
-  map: 020000000200000002000000020000000200000002000000020000000200000002000000020000000100000001000000010000000100000001000000030000000100000002000000020000000100000001000000010000000100000001000000010000000100000002000000020000000100000001000000020000000100000002000000020000000200000002000000020000000100000003000000020000000000000000000000000000000000000002000000020000000100000003000000010000000000000000000000000000000000000002000000020000000100000001000000020000000000000000000000000000000000000002000000020000000100000003000000020000000000000000000000000000000000000002000000020000000200000002000000020000000200000002000000020000000200000002000000
-  startTile: {x: 2, y: 3}
+  tileRefMap:
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: 
+    tileId: 
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: 
+    tileId: 
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: 
+    tileId: 
+  - packName: 
+    tileId: 
+  - packName: 
+    tileId: 
+  - packName: 
+    tileId: 
+  - packName: 
+    tileId: 
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: 
+    tileId: 
+  - packName: 
+    tileId: 
+  - packName: 
+    tileId: 
+  - packName: 
+    tileId: 
+  - packName: 
+    tileId: 
+  - packName: 
+    tileId: 
+  localPacks:
+  - {fileID: 11400000, guid: 04abf23a1a827be4280002f40bf0771b, type: 2}
+  - {fileID: 11400000, guid: bb3c7066147bc314aa8e2e36f8c8befc, type: 2}
+  startTile: {x: 2, y: 4}
+  difficulty: 1
+  solutionPath:
+  - {x: 2, y: 4}
+  - {x: 4, y: 5}
+  - {x: 6, y: 4}
+  - {x: 7, y: 2}
+  - {x: 5, y: 1}
+  - {x: 4, y: 3}
+  - {x: 2, y: 2}
+  - {x: 4, y: 1}
+  - {x: 5, y: 3}
+  - {x: 6, y: 1}
+  - {x: 7, y: 3}
+  - {x: 5, y: 2}
+  - {x: 4, y: 4}
+  - {x: 2, y: 3}
+  - {x: 4, y: 2}
+  - {x: 2, y: 1}
+  - {x: 1, y: 3}
+  - {x: 2, y: 5}

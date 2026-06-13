@@ -27,7 +27,7 @@ public enum Difficulty
     Easy, Normal, Hard, VeryHard, Expert, Nightmare
 }
 
-public class GameController : MonoBehaviour
+public class GameController : MonoBehaviour, IGameController
 {
     [Header("Level")]
     public LevelData[] allLevels;
@@ -77,10 +77,6 @@ public class GameController : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private CinemachineMapFitter camFitter;
 
-    private TileRef[] originalRefMap;
-    private Vector2Int originalStart;
-    private int originalWalkable;
-
 #if UNITY_EDITOR
     [ContextMenu("Check Map Solvable")]
     private void EditorCheck()
@@ -95,8 +91,6 @@ public class GameController : MonoBehaviour
             new(1,2), new(2,1), new(-1,2), new(-2,1),
             new(1,-2), new(2,-1), new(-1,-2), new(-2,-1)
         };
-
-    private Difficulty difficulty = Difficulty.Normal;
 
     // ===================== UNITY =====================
 
@@ -125,6 +119,8 @@ public class GameController : MonoBehaviour
             int level = PlayerPrefs.GetInt("SelectedLevel", 0);
             LoadLevel(level);
         }
+
+        camFitter.FitToTilemap();
     }
 
     // ===================== LEVEL =====================
@@ -134,6 +130,7 @@ public class GameController : MonoBehaviour
         {
             HandleClick();
         }
+
     }
 
     private void HandleClick()
@@ -198,7 +195,7 @@ public class GameController : MonoBehaviour
 
         DrawMap();
         SpawnFrog();
-        AfterMapGenerated();
+        camFitter.FitToTilemap();
     }
 
     public void RecordMove(Vector2Int from, Vector2Int to)
@@ -266,12 +263,10 @@ public class GameController : MonoBehaviour
                     lotusTilemap.SetTile(new Vector3Int(x, y, 0), tileBase);
             }
         }
-    }
-
-    void AfterMapGenerated()
-    {
         camFitter.FitToTilemap();
     }
+
+
 
     // ===================== TILE DATA =====================
 
@@ -406,6 +401,7 @@ public class GameController : MonoBehaviour
         if (gameOverUI) gameOverUI.SetActive(true);
         Time.timeScale = 0f;
         OnGamePanel.SetActive(false);
+        camFitter.FitToTilemap();
     }
 
     private void Win()
@@ -630,175 +626,7 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
-    // ===================== RANDOM LEVEL =====================
-
-    bool TryGenerateRandomPath(int w, int h, int steps, out List<Vector2Int> path)
-    {
-        path = new List<Vector2Int>();
-        for (int attempt = 0; attempt < 100; attempt++)
-        {
-            Vector2Int start = new Vector2Int(Random.Range(0, w), Random.Range(0, h));
-            var used = new HashSet<Vector2Int>();
-            var tempPath = new List<Vector2Int>();
-            if (GenerateDFS(start, steps, w, h, tempPath, used))
-            {
-                path = tempPath;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    bool GenerateDFS(Vector2Int pos, int steps, int w, int h, List<Vector2Int> path, HashSet<Vector2Int> used)
-    {
-        path.Add(pos);
-        used.Add(pos);
-        if (path.Count == steps) return true;
-
-        List<Vector2Int> moves = new(knightMoves);
-        Shuffle(moves);
-
-        foreach (var m in moves)
-        {
-            Vector2Int next = pos + m;
-            if (next.x < 0 || next.y < 0 || next.x >= w || next.y >= h) continue;
-            if (used.Contains(next)) continue;
-            if (GenerateDFS(next, steps, w, h, path, used)) return true;
-        }
-
-        path.RemoveAt(path.Count - 1);
-        used.Remove(pos);
-        return false;
-    }
-
-    void Shuffle(List<Vector2Int> list)
-    {
-        for (int i = 0; i < list.Count; i++)
-        {
-            int r = Random.Range(i, list.Count);
-            (list[i], list[r]) = (list[r], list[i]);
-        }
-    }
-
-    public void LoadRandomLevel(int width, int height, int minLotus, int maxLotus)
-    {
-        OnGamePanel.SetActive(true);
-        Time.timeScale = 1f;
-        float lotusRatio = 0.5f;
-
-        switch (difficulty)
-        {
-            case Difficulty.Easy:   lotusRatio = 0.45f; break;
-            case Difficulty.Normal: lotusRatio = 0.55f; break;
-            case Difficulty.Hard:   lotusRatio = 0.6f;  break;
-        }
-
-        int lotusCount = Mathf.Clamp(Mathf.RoundToInt(width * height * lotusRatio), minLotus, maxLotus);
-
-        if (!TryGenerateRandomPath(width, height, lotusCount, out var path))
-        {
-            Debug.LogError("? Failed to generate random map");
-            return;
-        }
-
-        runtimeRefMap = new TileRef[width * height];
-        TileRef waterRef = FindTileRefByLogic(LogicTileType.Water);
-        TileRef lotusRef = FindTileRefByLogic(LogicTileType.Lotus);
-
-        for (int i = 0; i < runtimeRefMap.Length; i++)
-            runtimeRefMap[i] = waterRef;
-
-        foreach (var p in path)
-            runtimeRefMap[p.y * width + p.x] = lotusRef;
-
-        int extra = lotusCount - path.Count;
-        int tries = 0;
-        while (extra > 0 && tries < 5000)
-        {
-            tries++;
-            int x = Random.Range(0, width);
-            int y = Random.Range(0, height);
-            int idx = y * width + x;
-            if (runtimeRefMap[idx].IsEmpty || (waterRef.IsEmpty ? false : runtimeRefMap[idx].tileId == waterRef.tileId))
-            {
-                runtimeRefMap[idx] = lotusRef;
-                extra--;
-            }
-        }
-
-        currentLevel = ScriptableObject.CreateInstance<LevelData>();
-        currentLevel.width = width;
-        currentLevel.height = height;
-        currentLevel.startTile = path[0];
-        currentLevel.localPacks = tilePacks;
-        currentLevel.tileRefMap = (TileRef[])runtimeRefMap.Clone();
-
-        runtimeLogicMap = BuildLogicMap(currentLevel, runtimeRefMap);
-
-        totalWalkableTiles = 0;
-        foreach (var t in runtimeLogicMap)
-            if (t == LogicTileType.Lotus) totalWalkableTiles++;
-
-        visitedTiles.Clear();
-
-        lotusTilemap.ClearAllTiles();
-        highlightTilemap.ClearAllTiles();
-
-        DrawMap();
-        SpawnFrog();
-
-        originalRefMap = (TileRef[])runtimeRefMap.Clone();
-        originalStart = currentLevel.startTile;
-        originalWalkable = totalWalkableTiles;
-        AfterMapGenerated();
-    }
-
-    public void RetrySameRandomMap(int randomSize)
-    {
-        Time.timeScale = 1f;
-        if (winUI) winUI.SetActive(false);
-        if (gameOverUI) gameOverUI.SetActive(false);
-        OnGamePanel.SetActive(true);
-        if (originalRefMap == null) { Debug.LogError("No snapshot to retry"); return; }
-
-        runtimeRefMap = (TileRef[])originalRefMap.Clone();
-        runtimeLogicMap = BuildLogicMap(currentLevel, runtimeRefMap);
-        totalWalkableTiles = originalWalkable;
-
-        visitedTiles.Clear();
-        moveHistory.Clear();
-
-        currentLevel = ScriptableObject.CreateInstance<LevelData>();
-        currentLevel.width = randomSize;
-        currentLevel.height = randomSize;
-        currentLevel.startTile = originalStart;
-
-        lotusTilemap.ClearAllTiles();
-        highlightTilemap.ClearAllTiles();
-
-        DrawMap();
-        SpawnFrog();
-        AfterMapGenerated();
-    }
-
     // ===================== TILEPACK HELPERS =====================
-
-    private TileRef FindTileRefByLogic(LogicTileType logic)
-    {
-        if (_packLookup != null)
-        {
-            foreach (var pack in _packLookup.Values)
-            {
-                if (pack == null) continue;
-                foreach (var entry in pack.entries)
-                {
-                    if (entry != null && entry.logicType == logic && !string.IsNullOrEmpty(entry.id))
-                        return new TileRef(pack.packName, entry.id);
-                }
-            }
-        }
-        return TileRef.Empty;
-    }
 
     private TileBase ResolveTileBase(TileRef tref)
     {
