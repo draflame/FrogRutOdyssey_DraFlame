@@ -12,6 +12,180 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9607d6134833c44f90d045074ff958a, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: Assembly-CSharp::TilePack
-  packName: 
+  packName: Default
   packColor: {r: 1, g: 1, b: 1, a: 1}
-  entries: []
+  entries:
+  - id: Grass
+    tile: {fileID: 11400000, guid: 91c5e217d2d10904db2fa5f4eeb340ca, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 3
+  - id: Wooden Box
+    tile: {fileID: 11400000, guid: f30ba1fe58e474c44a3c7f1db9ff8925, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 3
+  - id: Stump
+    tile: {fileID: 11400000, guid: 06dabc4ccb1a4d8488293f4f5a729fdc, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 3
+  - id: T Junction
+    tile: {fileID: 11400000, guid: 08cdeb99057af1340b457cf9f868365e, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 3
+  - id: Well
+    tile: {fileID: 11400000, guid: 14d54c3db754394469bb68fd6c50212f, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 3
+  - id: Leaf
+    tile: {fileID: 11400000, guid: 76dbeff793c2e574bba47e5577bac0dd, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 3
+  - id: Ruined Fence
+    tile: {fileID: 11400000, guid: 1b7ae5a2aedfa2b4faa04bbc46f61a47, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 3
+  - id: Water
+    tile: {fileID: 11400000, guid: d6a0f1d688c1bb64d81c5b4ac7011467, type: 2}
+    editorColor: {r: 0.4784314, g: 0.6392157, b: 0.76470596, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 2
+  - id: Lotus Small Leaf
+    tile: {fileID: 11400000, guid: 7cb737d6e939dd94a854d3a7fe4033cb, type: 2}
+    editorColor: {r: 0.08567457, g: 0.4423633, b: 0.7207546, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 2
+  - id: Jetty
+    tile: {fileID: 11400000, guid: 490bdffd30acdc54fa890529a011b54c, type: 2}
+    editorColor: {r: 0.08567457, g: 0.4423633, b: 0.7207546, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 2
+  - id: Wave
+    tile: {fileID: 11400000, guid: a1c6f8d61be29184080501b60a65b33b, type: 2}
+    editorColor: {r: 0.08567457, g: 0.4423633, b: 0.7207546, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 2
+  - id: Lotus Flower
+    tile: {fileID: 11400000, guid: 1dd9d7553383fef48996339acfa4d5f7, type: 2}
+    editorColor: {r: 0.08567457, g: 0.4423633, b: 0.7207546, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 2
+  - id: Stone Water
+    tile: {fileID: 11400000, guid: 74fc6986dc104eb4dab697252061aaa2, type: 2}
+    editorColor: {r: 0.08567457, g: 0.4423633, b: 0.7207546, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 2
+  - id: Lotus Leaf
+    tile: {fileID: 11400000, guid: c291b3e094bd35c4cb9f52905262f2ab, type: 2}
+    editorColor: {r: 0.11764707, g: 0.3921569, b: 0.28235295, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 1
+  - id: Cattail
+    tile: {fileID: 11400000, guid: d8dafc0c023ec5e41bc238709d257cf2, type: 2}
+    editorColor: {r: 0.4784314, g: 0.6392157, b: 0.76470596, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 2
+  - id: Right Top Grass
+    tile: {fileID: 11400000, guid: b9dfa2447bf6db74bbf889e417d71072, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Right Top Stone
+    tile: {fileID: 11400000, guid: 03c0a8fd81815014b90d8caf5131dce8, type: 2}
+    editorColor: {r: 0.5176471, g: 0.5254902, b: 0.5372549, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Bush
+    tile: {fileID: 11400000, guid: 64048e4f9658dad428aef1ab82bbc73f, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Small Grass
+    tile: {fileID: 11400000, guid: 603b9cad969a0664bb8578b2c6304b79, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Top Stone
+    tile: {fileID: 11400000, guid: 0daf6dd25f889564eb10643f8182a47f, type: 2}
+    editorColor: {r: 0.6, g: 0.60784316, b: 0.59607846, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Small Stone
+    tile: {fileID: 11400000, guid: 81cf4679ef851d44e94c8cf033762133, type: 2}
+    editorColor: {r: 0.6, g: 0.60784316, b: 0.59607846, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Right Grass
+    tile: {fileID: 11400000, guid: 630a18e8ff213e44484c44e2e844c21e, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Left Grass
+    tile: {fileID: 11400000, guid: 35283d770b32b704dbb3715be04cc233, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Tree
+    tile: {fileID: 11400000, guid: a602a96e11c9c7d43965f89e4fe07a69, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Tree 2
+    tile: {fileID: 11400000, guid: 33d96c90ce7edaa42a6ee68762382df8, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Tree 3
+    tile: {fileID: 11400000, guid: 64e14b867182b5d4080dacddb461ec44, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Flowers
+    tile: {fileID: 11400000, guid: 33a7de85f904088469666f803812589f, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Blue Flower
+    tile: {fileID: 11400000, guid: 684f9af0085bfb6488ab9d9c1531c672, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3
+  - id: Bobber
+    tile: {fileID: 11400000, guid: c183461347e2e504a86d3ec63cbc4e8a, type: 2}
+    editorColor: {r: 0.4039216, g: 0.6745098, b: 0.45098042, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3

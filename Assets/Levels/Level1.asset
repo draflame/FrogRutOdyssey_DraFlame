@@ -14,5 +14,87 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   width: 6
   height: 6
-  map: 020000000d0000000200000002000000020000000800000002000000090000000100000003000000030000000200000002000000030000000b00000003000000010000000200000002000000010000000300000006000000070000000200000002000000030000000300000001000000030000000200000010000000020000000a000000140000000200000002000000
+  tileRefMap:
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Stump
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: 
+    tileId: 
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Cattail
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Wave
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Bush
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  localPacks:
+  - {fileID: 11400000, guid: 04abf23a1a827be4280002f40bf0771b, type: 2}
+  map: 020000000d0000000200000002000000020000000800000002000000090000000100000003000000030000000200000002000000010000000b00000001000000030000000200000002000000030000000300000001000000030000000200000002000000030000000100000003000000030000000200000010000000020000000a000000140000000200000002000000
   startTile: {x: 2, y: 1}
+  difficulty: 0
+  solutionPath:
+  - {x: 2, y: 1}
+  - {x: 3, y: 3}
+  - {x: 1, y: 2}
+  - {x: 2, y: 4}
+  - {x: 3, y: 2}
