@@ -287,7 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelSelectController
   levelButtonPrefab: {fileID: 2953422418646476214, guid: 4e65d0369117bd2428d3d592c8c58c01, type: 3}
   gridParent: {fileID: 1890351427}
-  totalLevels: 20
+  levelDatabase: {fileID: 11400000, guid: 4bdc41ede0c0a024cac64bbed0d074ef, type: 2}
   pageSize: 10
   prevButton: {fileID: 1113304469}
   nextButton: {fileID: 1220351846}

@@ -189,3 +189,9 @@ MonoBehaviour:
     category: 
     isWalkable: 1
     logicType: 3
+  - id: Stone Water 2
+    tile: {fileID: 11400000, guid: 474f9b138d6a3534791451708b883237, type: 2}
+    editorColor: {r: 0.5882353, g: 0.57254905, b: 0.50980395, a: 0}
+    category: 
+    isWalkable: 1
+    logicType: 3

@@ -1,81 +1,75 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Nút toggle Highlight gắn trực tiếp trên màn chơi.
+/// Chỉ chịu trách nhiệm: thay đổi sprite + thông báo cho GameController.
+/// KHÔNG tự cập nhật SettingManager (để tránh vòng lặp gọi nhau).
+/// </summary>
 public class HighLightButton : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private bool isHighLight = true;
-    [SerializeField] private Sprite highLightSprite; // Ảnh hiển thị khi BẬT highlight (mắt mở - eye open)
-    [SerializeField] private Sprite normalSprite;    // Ảnh hiển thị khi TẮT highlight (mắt nhắm - eye close)
+
+    [Header("Sprites (kéo thả 2 ảnh vào đây)")]
+    [SerializeField] private Sprite highLightSprite; // ảnh khi BẬT highlight
+    [SerializeField] private Sprite normalSprite;    // ảnh khi TẮT highlight
 
     [Header("Component References")]
     [SerializeField] private Image buttonImage;
-    [SerializeField] private SpriteRenderer spriteRenderer;
 
-    private IGameController gameController;
+    private IGameController _gameController;
 
     private void Start()
     {
-        // Tự động tìm component nếu chưa được kéo thả trong Inspector
-        if (buttonImage == null) buttonImage = GetComponent<Image>();
-        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+        // Tìm Image trên chính GameObject hoặc các child
+        if (buttonImage == null) buttonImage = GetComponentInChildren<Image>();
 
-        // Tìm Game Controller tương ứng trong scene
-        gameController = Object.FindAnyObjectByType<GameController>();
-        if (gameController == null)
-        {
-            gameController = Object.FindAnyObjectByType<RandomGameController>();
-        }
+        _gameController = Object.FindAnyObjectByType<GameController>();
+        if (_gameController == null)
+            _gameController = Object.FindAnyObjectByType<RandomGameController>();
 
-        // Cập nhật ảnh hiển thị ban đầu dựa trên trạng thái
+        // Đọc trạng thái từ SettingManager một lần duy nhất khi khởi tạo
+        if (SettingManager.Instance != null)
+            isHighLight = SettingManager.Instance.IsHighlightOn;
+
         UpdateVisual();
     }
 
-    // Hàm toggle, khi nhấn sẽ đổi trạng thái isHighLight và cập nhật ảnh tương ứng
+    /// <summary>
+    /// Gọi hàm này từ OnClick của Button trong Unity Inspector.
+    /// Toggle trạng thái, đổi sprite, cập nhật GameController.
+    /// </summary>
     public void ToggleHighLight()
     {
         isHighLight = !isHighLight;
         UpdateVisual();
-
-        if (gameController != null)
-        {
-            gameController.ToggleHighlight();
-        }
+        ApplyToGameController();
     }
 
-    // Hàm set highlight, đặt trạng thái cụ thể và cập nhật ảnh tương ứng
+    /// <summary>
+    /// Gọi từ bên ngoài (SettingUIController, SettingManager, v.v.)
+    /// khi muốn đặt trạng thái cụ thể mà KHÔNG gây vòng lặp.
+    /// </summary>
     public void SetHighLight(bool value)
     {
+        if (isHighLight == value) return; // không làm gì nếu đã đúng rồi
         isHighLight = value;
         UpdateVisual();
-
-        if (gameController != null)
-        {
-            gameController.SetHighlight(value);
-        }
+        ApplyToGameController();
     }
 
-    // Hàm get highlight, trả về trạng thái hiện tại
-    public bool GetHighLight()
-    {
-        return isHighLight;
-    }
+    public bool GetHighLight() => isHighLight;
 
-    // Cập nhật ảnh hiển thị của Image hoặc SpriteRenderer
     private void UpdateVisual()
     {
-        Sprite targetSprite = isHighLight ? highLightSprite : normalSprite;
+        if (buttonImage == null) return;
+        buttonImage.sprite = isHighLight ? highLightSprite : normalSprite;
+    }
 
-        if (buttonImage != null)
-        {
-            buttonImage.sprite = targetSprite;
-        }
-
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.sprite = targetSprite;
-        }
+    private void ApplyToGameController()
+    {
+        if (_gameController != null)
+            _gameController.SetHighlight(isHighLight);
     }
 }
-
-

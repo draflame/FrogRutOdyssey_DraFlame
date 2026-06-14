@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using TMPro;
 
 [System.Serializable]
 public struct MoveRecord
@@ -30,7 +31,8 @@ public enum Difficulty
 public class GameController : MonoBehaviour, IGameController
 {
     [Header("Level")]
-    public LevelData[] allLevels;
+    [SerializeField] private LevelDatabase levelDatabase;
+    [SerializeField] private TextMeshProUGUI levelName;
     public int currentLevelIndex;
     private LevelData currentLevel;
 
@@ -155,16 +157,16 @@ public class GameController : MonoBehaviour, IGameController
 
     public void LoadLevel(int index)
     {
-        if (allLevels == null || allLevels.Length == 0)
+        if (levelDatabase == null || levelDatabase.levels == null || levelDatabase.levels.Count == 0)
         {
-            Debug.LogError("No levels assigned!");
+            Debug.LogError("No levels assigned in database!");
             return;
         }
         Time.timeScale = 1f;
         OnGamePanel.SetActive(true);
-        currentLevelIndex = Mathf.Clamp(index, 0, allLevels.Length - 1);
-        currentLevel = allLevels[currentLevelIndex];
-
+        currentLevelIndex = Mathf.Clamp(index, 0, levelDatabase.levels.Count - 1);
+        currentLevel = levelDatabase.levels[currentLevelIndex];
+        levelName.text = "Level "+(currentLevelIndex+1);
         if (currentLevel == null)
         {
             Debug.LogError("Level is NULL");
@@ -192,6 +194,11 @@ public class GameController : MonoBehaviour, IGameController
         if (winUI) winUI.SetActive(false);
 
         moveHistory.Clear();
+
+        // ── Đồng bộ trạng thái highlight từ SettingManager ──────────
+        // Đảm bảo tilemap luôn khớp với setting đã lưu khi vào map mới
+        if (SettingManager.Instance != null)
+            showHighlight = SettingManager.Instance.IsHighlightOn;
 
         DrawMap();
         SpawnFrog();
@@ -408,7 +415,16 @@ public class GameController : MonoBehaviour, IGameController
     {
         if (winUI) winUI.SetActive(true);
         Time.timeScale = 0f;
+        
         OnGamePanel.SetActive(false);
+
+        // Mở khóa level tiếp theo
+        int highestLevel = PlayerPrefs.GetInt("HighestLevel", 0);
+        if (currentLevelIndex >= highestLevel)
+        {
+            PlayerPrefs.SetInt("HighestLevel", currentLevelIndex + 1);
+            PlayerPrefs.Save();
+        }
     }
 
     /// <summary>Cập nhật logic tile và re-render visual.</summary>
@@ -629,8 +645,17 @@ public class GameController : MonoBehaviour, IGameController
 
     public void OnNextLevel()
     {
-        PlayerPrefs.SetInt("SelectedLevel", currentLevelIndex + 1);
-        SceneManager.LoadScene("GameScene");
+        if (levelDatabase == null || levelDatabase.levels == null) return;
+        int nextLevelIndex = currentLevelIndex + 1;
+        if (nextLevelIndex < levelDatabase.levels.Count)
+        {
+            PlayerPrefs.SetInt("SelectedLevel", nextLevelIndex);
+            SceneManager.LoadScene("GameScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("LevelSelectScene");
+        }
     }
 
     // ===================== TILEPACK HELPERS =====================

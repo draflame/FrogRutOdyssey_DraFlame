@@ -38,27 +38,27 @@ MonoBehaviour:
   - packName: Default
     tileId: Water
   - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
     tileId: Water
   - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
     tileId: Grass
   - packName: Default
     tileId: Grass
   - packName: Default
-    tileId: Cattail
-  - packName: Default
-    tileId: Lotus Small Leaf
-  - packName: Default
     tileId: Lotus Leaf
   - packName: Default
     tileId: Lotus Leaf
   - packName: Default
     tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
   - packName: Default
     tileId: Lotus Leaf
   - packName: Default
@@ -70,13 +70,13 @@ MonoBehaviour:
   - packName: Default
     tileId: Lotus Leaf
   - packName: Default
-    tileId: Lotus Leaf
+    tileId: Water
   - packName: Default
     tileId: Lotus Leaf
   - packName: Default
     tileId: Lotus Leaf
   - packName: Default
-    tileId: Lotus Leaf
+    tileId: Water
   - packName: Default
     tileId: Grass
   - packName: 
@@ -115,5 +115,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 04abf23a1a827be4280002f40bf0771b, type: 2}
   - {fileID: 11400000, guid: bb3c7066147bc314aa8e2e36f8c8befc, type: 2}
   startTile: {x: 2, y: 2}
-  difficulty: 0
-  solutionPath: []
+  difficulty: 2
+  solutionPath:
+  - {x: 2, y: 2}
+  - {x: 4, y: 1}
+  - {x: 5, y: 3}
+  - {x: 3, y: 2}
+  - {x: 5, y: 1}
+  - {x: 4, y: 3}
+  - {x: 6, y: 2}
+  - {x: 5, y: 4}
+  - {x: 4, y: 2}
+  - {x: 2, y: 3}
+  - {x: 3, y: 1}
+  - {x: 1, y: 2}

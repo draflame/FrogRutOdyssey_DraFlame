@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 
@@ -14,13 +13,31 @@ public class FrogController : MonoBehaviour
 
     private Animator animator;
 
+    // Helper để khôi phục tham chiếu IGameController nếu bị mất sau Hot Reload
+    private IGameController GetGameController()
+    {
+        if (game == null)
+        {
+            game = Object.FindAnyObjectByType<GameController>() as IGameController;
+            if (game == null)
+            {
+                game = Object.FindAnyObjectByType<RandomGameController>() as IGameController;
+            }
+        }
+        return game;
+    }
+
     // ================= INIT =================
     public void Initialize(IGameController controller, Vector2Int startTile)
     {
         game = controller;
         currentTile = startTile;
 
-        transform.position = game.GetWorldPosition(currentTile);
+        var ctrl = GetGameController();
+        if (ctrl != null)
+        {
+            transform.position = ctrl.GetWorldPosition(currentTile);
+        }
 
         animator = GetComponent<Animator>();
     }
@@ -29,7 +46,15 @@ public class FrogController : MonoBehaviour
     public void TryMove(Vector2Int target)
     {
         if (isMoving) return;
-        if (!game.CanMove(currentTile, target)) return;
+        
+        var ctrl = GetGameController();
+        if (ctrl == null)
+        {
+            Debug.LogError("[FrogController] Game controller reference is missing and cannot be restored!");
+            return;
+        }
+
+        if (!ctrl.CanMove(currentTile, target)) return;
 
         StartCoroutine(JumpRoutine(target));
     }
@@ -37,18 +62,21 @@ public class FrogController : MonoBehaviour
     // ================= JUMP =================
     private IEnumerator JumpRoutine(Vector2Int target)
     {
-        game.RecordMove(currentTile, target);
+        var ctrl = GetGameController();
+        if (ctrl == null) yield break;
+
+        ctrl.RecordMove(currentTile, target);
         isMoving = true;
 
-        // 🐸 Set animation
+        // Kích hoạt animation nhảy
         if (animator) animator.SetBool("Jump", true);
 
-        // Biến ô cũ thành empty
-        game.ClearTile(currentTile);
-        game.ConsumeTile(currentTile);
+        // Biến ô cũ thành trống
+        ctrl.ClearTile(currentTile);
+        ctrl.ConsumeTile(currentTile);
 
         Vector3 startPos = transform.position;
-        Vector3 endPos = game.GetWorldPosition(target);
+        Vector3 endPos = ctrl.GetWorldPosition(target);
 
         float time = 0f;
 
@@ -59,36 +87,45 @@ public class FrogController : MonoBehaviour
             // Di chuyển ngang
             Vector3 pos = Vector3.Lerp(startPos, endPos, time);
 
-            // Parabol: -4(x-0.5)^2 + 1
+            // Tạo đường nhảy parabol
             float height = 4f * jumpHeight * time * (1f - time);
             pos.y += height;
 
             transform.position = pos;
             yield return null;
         }
-        // Snap chính xác
+
+        // Đưa về vị trí chính xác
         transform.position = endPos;
         currentTile = target;
-        //game.VisitTile(currentTile);
-        // 🐸 End animation
+
         if (animator) animator.SetBool("Jump", false);
         
         isMoving = false;
-        game.OnFrogMoved(currentTile);
-        
-        game.HighlightValidMoves(currentTile);
+
+        // Gọi các sự kiện sau khi nhảy xong
+        ctrl = GetGameController();
+        if (ctrl != null)
+        {
+            ctrl.OnFrogMoved(currentTile);
+            ctrl.HighlightValidMoves(currentTile);
+        }
     }
+
     public void ForceMove(Vector2Int tile)
     {
         StopAllCoroutines();
         isMoving = false;
 
         currentTile = tile;
-        transform.position = game.GetWorldPosition(tile);
+
+        var ctrl = GetGameController();
+        if (ctrl != null)
+        {
+            transform.position = ctrl.GetWorldPosition(tile);
+        }
 
         if (animator)
             animator.SetBool("Jump", false);
     }
-
 }
-
