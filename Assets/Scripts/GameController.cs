@@ -548,6 +548,7 @@ public class GameController : MonoBehaviour, IGameController
             Destroy(frogInstance.gameObject);
             frogInstance = null;
         }
+        CloseSetting();
         LoadLevel(currentLevelIndex);
     }
 
@@ -618,6 +619,12 @@ public class GameController : MonoBehaviour, IGameController
         else Time.timeScale = 0f;
         SettingPanel.gameObject.SetActive(!isSetting);
         isSetting = !isSetting;
+    }
+    public void CloseSetting()
+    {
+        isSetting = false;
+        Time.timeScale = 1f;
+        SettingPanel.gameObject.SetActive(false);
     }
 
     public void OnNextLevel()

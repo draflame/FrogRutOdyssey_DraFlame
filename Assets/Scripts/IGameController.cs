@@ -9,4 +9,6 @@ public interface IGameController
     void ConsumeTile(Vector2Int tile);
     void OnFrogMoved(Vector2Int currentTile);
     void HighlightValidMoves(Vector2Int from);
+    void ToggleHighlight();
+    void SetHighlight(bool value);
 }
