@@ -55,7 +55,7 @@ MonoBehaviour:
     tileId: Grass
   - packName: Default
     tileId: Tree
-  sceneName: ToturialScene
+  sceneName: TutorialScene
   localPacks:
   - {fileID: 11400000, guid: 04abf23a1a827be4280002f40bf0771b, type: 2}
   startTile: {x: 1, y: 1}

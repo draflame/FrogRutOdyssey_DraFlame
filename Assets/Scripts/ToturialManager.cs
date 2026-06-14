@@ -15,6 +15,8 @@ public class ToturialManager : MonoBehaviour
         ExplainRules2,
         ExplainRules3,
         ExplainRules4,
+        ExplainRules5,
+        ExplainRules6,
         SetupLevel0,       
         PlayingLevel0,
         WinLevel0,
@@ -23,9 +25,11 @@ public class ToturialManager : MonoBehaviour
         WinLevel1,
         SetupLevel2,       
         PlayingLevel2,
-        Complete           
+        Complete,
+        LevelFailed
     }
     private TutorialStep currentStep = TutorialStep.Welcome;
+    private bool isFailedState = false;
 
     [Header("UI Elements")]
     [SerializeField] private GameObject Frog;
@@ -34,17 +38,24 @@ public class ToturialManager : MonoBehaviour
     [SerializeField] private Button HighLight;
     [SerializeField] private TextMeshProUGUI InstructionText;
     [SerializeField] private Image ExplainImage;
+    [SerializeField] private Button RetryButton;
 
     [Header("Sprites")]
     [SerializeField] private Sprite[] ExplainSprite;
+    [SerializeField] private Image HighlightImage;
+    [SerializeField] private Image RetryImage;
 
     [Header("Game Controller")]
     [SerializeField] private TutorialGameController gameController;
 
     void Start()
     {
+        if (gameController == null)
+        {
+            gameController = Object.FindAnyObjectByType<TutorialGameController>();
+        }
+
         if (Retry != null) Retry.onClick.AddListener(OnRetryClick);
-        if (HighLight != null) HighLight.onClick.AddListener(OnHighlightClick);
 
         UpdateToToturialState();
     }
@@ -53,12 +64,25 @@ public class ToturialManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (isFailedState)
+            {
+                isFailedState = false;
+                IntroducePanel.SetActive(false);
+                if (gameController != null)
+                {
+                    gameController.PlayAgain();
+                }
+                return;
+            }
+
             if (currentStep == TutorialStep.Welcome ||
                 currentStep == TutorialStep.Introduction ||
                 currentStep == TutorialStep.ExplainRules1 ||
                 currentStep == TutorialStep.ExplainRules2 ||
                 currentStep == TutorialStep.ExplainRules3 ||
                 currentStep == TutorialStep.ExplainRules4 ||
+                currentStep == TutorialStep.ExplainRules5 ||
+                currentStep == TutorialStep.ExplainRules6 ||
                 currentStep == TutorialStep.WinLevel0 ||
                 currentStep == TutorialStep.WinLevel1 ||
                 currentStep == TutorialStep.Complete)
@@ -70,6 +94,7 @@ public class ToturialManager : MonoBehaviour
 
     private void AdvanceStep()
     {
+        Debug.Log($"[ToturialManager] AdvanceStep. Old step: {currentStep}");
         // Nếu ở bước Complete và click chuột tiếp, chuyển về màn chọn Level
         if (currentStep == TutorialStep.Complete)
         {
@@ -78,6 +103,7 @@ public class ToturialManager : MonoBehaviour
         }
 
         currentStep++;
+        Debug.Log($"[ToturialManager] New step: {currentStep}");
         UpdateToToturialState();
     }
 
@@ -88,6 +114,9 @@ public class ToturialManager : MonoBehaviour
 
     private void OnRetryClick()
     {
+        isFailedState = false;
+        if (IntroducePanel != null) IntroducePanel.SetActive(false);
+        
         if (gameController != null)
         {
             gameController.PlayAgain();
@@ -100,16 +129,11 @@ public class ToturialManager : MonoBehaviour
         }
     }
 
-    private void OnHighlightClick()
-    {
-        if (gameController != null)
-        {
-            gameController.ToggleHighlight();
-        }
-    }
 
     private void UpdateToToturialState()
     {
+
+
         switch (currentStep)
         {
             case TutorialStep.Welcome:
@@ -135,10 +159,22 @@ public class ToturialManager : MonoBehaviour
                 Talk("Finally, you win the level when the frog has successfully jumped across EVERY single lotus leaf on the screen. Let's start training, shall we?");
                 ChangeExplanationImage(3);
                 break;
-
+            case TutorialStep.ExplainRules5:
+                Talk("Look at the UI! If you ever get stuck and don't know where to jump next, just press the <color=#00FFCC>Highlight button</color> to reveal all available legal moves!");
+                HighLight.gameObject.SetActive(true);
+                ExplainImage.gameObject.SetActive(false);
+                HighlightImage.gameObject.SetActive(true);
+                break;
+            case TutorialStep.ExplainRules6:
+                Talk("And if you want to start the level over, just press the <color=#00FFCC>Retry button</color> to reset the level and try again!");
+                 RetryImage.gameObject.SetActive(true);
+                 HighlightImage.gameObject.SetActive(false);
+                break;
             // LEVEL 0
             case TutorialStep.SetupLevel0:
                 ExplainImage.gameObject.SetActive(false);
+                HighlightImage.gameObject.SetActive(false);
+                RetryImage.gameObject.SetActive(false);
                 IntroducePanel.SetActive(false);
                 if (gameController != null)
                 {
@@ -237,7 +273,8 @@ public class ToturialManager : MonoBehaviour
     // ──────────── Callback khi thua level từ TutorialGameController ────────────
     public void OnLevelFailed()
     {
+        isFailedState = true;
         IntroducePanel.SetActive(true);
-        Talk("Oh no! No more moves possible. Click the 'Retry' button on screen to try this level again!");
+        Talk("Oh no! No more moves possible. Click anywhere on screen to retry this level!");
     }
 }

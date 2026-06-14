@@ -202,7 +202,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793437810}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: PlayAgain
         m_Mode: 1
@@ -409,8 +409,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793437810}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 1793437812}
+        m_TargetAssemblyTypeName: TutorialGameController, Assembly-CSharp
         m_MethodName: ToggleSetting
         m_Mode: 1
         m_Arguments:
@@ -596,6 +596,156 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &83151683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 83151684}
+  - component: {fileID: 83151685}
+  - component: {fileID: 83151686}
+  m_Layer: 5
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &83151684
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83151683}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 674855827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 134, y: 113}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &83151685
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83151683}
+  m_CullTransparentMesh: 1
+--- !u!114 &83151686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83151683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -7014426520930834537, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &165505189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 165505190}
+  - component: {fileID: 165505191}
+  - component: {fileID: 165505192}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &165505190
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165505189}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 674855827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -46, y: 113}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &165505191
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165505189}
+  m_CullTransparentMesh: 1
+--- !u!114 &165505192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165505189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 1356339591869341262, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &222143192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,14 +1258,17 @@ MonoBehaviour:
   Frog: {fileID: 1641148163}
   IntroducePanel: {fileID: 674855826}
   Retry: {fileID: 0}
-  HighLight: {fileID: 0}
+  HighLight: {fileID: 551107966}
   InstructionText: {fileID: 2134271374}
   ExplainImage: {fileID: 1782528927}
+  RetryButton: {fileID: 1634904682}
   ExplainSprite:
   - {fileID: -6362455638890453332, guid: e83a818b35d2ae74aa5376af64d19237, type: 3}
   - {fileID: -58946157445962141, guid: e83a818b35d2ae74aa5376af64d19237, type: 3}
   - {fileID: -6242672228509906079, guid: e83a818b35d2ae74aa5376af64d19237, type: 3}
   - {fileID: 869253428366626447, guid: e83a818b35d2ae74aa5376af64d19237, type: 3}
+  HighlightImage: {fileID: 165505192}
+  RetryImage: {fileID: 83151686}
   gameController: {fileID: 1793437812}
 --- !u!1 &551107965
 GameObject:
@@ -1181,7 +1334,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 551107967}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1793437812}
+        m_TargetAssemblyTypeName: TutorialGameController, Assembly-CSharp
+        m_MethodName: ToggleHighlight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &551107967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1567,6 +1732,9 @@ RectTransform:
   - {fileID: 2134271376}
   - {fileID: 1641148167}
   - {fileID: 1782528929}
+  - {fileID: 1634904681}
+  - {fileID: 165505190}
+  - {fileID: 83151684}
   m_Father: {fileID: 1074949322}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1588,7 +1756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1808,7 +1976,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1634904681}
   - {fileID: 551107971}
   - {fileID: 26645344}
   - {fileID: 960856340}
@@ -1995,7 +2162,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level '
+  m_text: Introduce
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c5bfb9edcfbc734db61fa89b52c6451, type: 2}
   m_sharedMaterial: {fileID: 7065903390936965891, guid: 3c5bfb9edcfbc734db61fa89b52c6451, type: 2}
@@ -2157,7 +2324,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793437810}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: BackToLevelSelect
         m_Mode: 1
@@ -2368,7 +2535,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793437810}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: OnNextLevel
         m_Mode: 1
@@ -2500,7 +2667,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793437810}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: BackToLevelSelect
         m_Mode: 1
@@ -2970,7 +3137,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793437810}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: BackToLevelSelect
         m_Mode: 1
@@ -3102,7 +3269,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793437810}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: PlayAgain
         m_Mode: 1
@@ -3823,7 +3990,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793437810}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: PlayAgain
         m_Mode: 1
@@ -3891,7 +4058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1634904681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3905,7 +4072,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2135912785}
-  m_Father: {fileID: 793263368}
+  m_Father: {fileID: 674855827}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3956,9 +4123,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793437810}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: Undo
+      - m_Target: {fileID: 1793437812}
+        m_TargetAssemblyTypeName: TutorialGameController, Assembly-CSharp
+        m_MethodName: PlayAgain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4011,17 +4178,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5560327766914549618, guid: 16391001e76646448a7c78cbbb77f5e5, type: 3}
   m_PrefabInstance: {fileID: 1064700503}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1641148164 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4154461336749640508, guid: 16391001e76646448a7c78cbbb77f5e5, type: 3}
-  m_PrefabInstance: {fileID: 1064700503}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1641148163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 584ebaf97a94e284297508b60abf5b66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1641148167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2446315655144686750, guid: 16391001e76646448a7c78cbbb77f5e5, type: 3}
@@ -4109,7 +4265,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1793437810}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
         m_MethodName: PlayAgain
         m_Mode: 1
@@ -4393,7 +4549,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1793437811}
-  - component: {fileID: 1793437810}
   - component: {fileID: 1793437812}
   m_Layer: 0
   m_Name: GameController
@@ -4402,35 +4557,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1793437810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793437809}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5659ccf44b6c3504da44df345ec12f07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelDatabase: {fileID: 11400000, guid: cf3238d7d6a41ad46a806c6a10919c24, type: 2}
-  levelName: {fileID: 933602888}
-  currentLevelIndex: 1
-  lotusTilemap: {fileID: 1498010714}
-  tilePacks:
-  - {fileID: 11400000, guid: 04abf23a1a827be4280002f40bf0771b, type: 2}
-  - {fileID: 11400000, guid: bb3c7066147bc314aa8e2e36f8c8befc, type: 2}
-  - {fileID: 11400000, guid: 19b67806559373548bb5f8313242c8b4, type: 2}
-  highlightTilemap: {fileID: 222143195}
-  highlightTile: {fileID: 11400000, guid: 1f6d2a062fff6294eb5c1b027448aeae, type: 2}
-  showHighlight: 1
-  frogPrefab: {fileID: 4154461336749640508, guid: 16391001e76646448a7c78cbbb77f5e5, type: 3}
-  gameOverUI: {fileID: 1512434671}
-  winUI: {fileID: 591955945}
-  SettingPanel: {fileID: 960856337}
-  OnGamePanel: {fileID: 793263367}
-  camFitter: {fileID: 514881574}
 --- !u!4 &1793437811
 Transform:
   m_ObjectHideFlags: 0
@@ -4467,8 +4593,10 @@ MonoBehaviour:
   highlightTilemap: {fileID: 222143195}
   highlightTile: {fileID: 11400000, guid: 1f6d2a062fff6294eb5c1b027448aeae, type: 2}
   showHighlight: 1
-  frogPrefab: {fileID: 1641148164}
+  frogPrefab: {fileID: 4154461336749640508, guid: 16391001e76646448a7c78cbbb77f5e5, type: 3}
   camFitter: {fileID: 514881574}
+  SettingPanel: {fileID: 960856337}
+  OnGamePanel: {fileID: 793263367}
 --- !u!1 &1989731002
 GameObject:
   m_ObjectHideFlags: 0
@@ -4831,7 +4959,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Undo
+  m_text: Retry
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c5bfb9edcfbc734db61fa89b52c6451, type: 2}
   m_sharedMaterial: {fileID: 7065903390936965891, guid: 3c5bfb9edcfbc734db61fa89b52c6451, type: 2}

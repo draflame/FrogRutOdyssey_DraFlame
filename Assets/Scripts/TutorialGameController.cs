@@ -38,6 +38,11 @@ public class TutorialGameController : MonoBehaviour, IGameController
     private int totalWalkableTiles;
     private Stack<MoveRecord> moveHistory = new();
 
+    [Header("Setting Panel")]
+    [SerializeField] private GameObject SettingPanel;
+    [SerializeField] private GameObject OnGamePanel;
+    private bool isSetting = false;
+
     public bool IsPlayable { get; set; } = false;
 
     private readonly Vector2Int[] knightMoves =
@@ -64,6 +69,11 @@ public class TutorialGameController : MonoBehaviour, IGameController
 
     private void Start()
     {
+        if (tutorialManager == null)
+        {
+            tutorialManager = Object.FindAnyObjectByType<ToturialManager>();
+        }
+
         // Đồng bộ highlight với SettingManager nếu có
         if (SettingManager.Instance != null)
         {
@@ -78,6 +88,11 @@ public class TutorialGameController : MonoBehaviour, IGameController
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log($"[TutorialGameController] Click detected. IsPlayable={IsPlayable}");
+        }
+
         if (IsPlayable && Input.GetMouseButtonDown(0))
         {
             HandleClick();
@@ -86,12 +101,6 @@ public class TutorialGameController : MonoBehaviour, IGameController
 
     private void HandleClick()
     {
-        if (UnityEngine.EventSystems.EventSystem.current != null &&
-            UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = Camera.main.nearClipPlane;
         Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mousePos);
@@ -100,13 +109,51 @@ public class TutorialGameController : MonoBehaviour, IGameController
         Vector3Int cell = lotusTilemap.WorldToCell(mouseWorld);
         Vector2Int target = new Vector2Int(cell.x, cell.y);
 
+        Debug.Log($"[TutorialGameController] Trying to move frog to tile={target}");
         TryMoveFrog(target);
     }
 
     private void TryMoveFrog(Vector2Int target)
     {
-        if (frogInstance == null) return;
+        if (frogInstance == null)
+        {
+            Debug.LogWarning("[TutorialGameController] Cannot move frog: frogInstance is null!");
+            return;
+        }
         frogInstance.TryMove(target);
+    }
+
+    public void ToggleSetting()
+    {
+        if (isSetting) Time.timeScale = 1f;
+        else Time.timeScale = 0f;
+
+        if (SettingPanel != null)
+            SettingPanel.SetActive(!isSetting);
+        
+        isSetting = !isSetting;
+        Debug.Log($"[TutorialGameController] ToggleSetting settingPanel active={isSetting}");
+    }
+
+    public void CloseSetting()
+    {
+        isSetting = false;
+        Time.timeScale = 1f;
+        if (SettingPanel != null)
+            SettingPanel.SetActive(false);
+        Debug.Log("[TutorialGameController] CloseSetting called");
+    }
+
+    public void BackToLevelSelect()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelectScene");
+    }
+
+    public void BackToMainMenu()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MenuScene");
     }
 
     public void LoadLevel(int index)
@@ -341,6 +388,10 @@ public class TutorialGameController : MonoBehaviour, IGameController
         showHighlight = !showHighlight;
         if (!showHighlight) ClearHighlights();
         else if (frogInstance != null) HighlightValidMoves(frogInstance.currentTile);
+
+        // Đồng bộ ngược lại cho HighLightButton ngoài màn chơi (nếu có)
+        HighLightButton hBtn = Object.FindAnyObjectByType<HighLightButton>();
+        if (hBtn != null) hBtn.SetHighLight(showHighlight);
     }
 
     public void SetHighlight(bool value)
@@ -348,6 +399,10 @@ public class TutorialGameController : MonoBehaviour, IGameController
         showHighlight = value;
         if (!showHighlight) ClearHighlights();
         else if (frogInstance != null) HighlightValidMoves(frogInstance.currentTile);
+
+        // Đồng bộ ngược lại cho HighLightButton ngoài màn chơi (nếu có)
+        HighLightButton hBtn = Object.FindAnyObjectByType<HighLightButton>();
+        if (hBtn != null) hBtn.SetHighLight(showHighlight);
     }
 
     public void HighlightValidMoves(Vector2Int from)
@@ -439,6 +494,19 @@ public class TutorialGameController : MonoBehaviour, IGameController
                 var entry = runtimePack.Get(tref.tileId);
                 result[i] = entry != null ? entry.logicType : LogicTileType.Grass;
                 continue;
+            }
+            if (level.localPacks != null)
+            {
+                bool found = false;
+                foreach (var lp in level.localPacks)
+                {
+                    if (lp == null || lp.packName != tref.packName) continue;
+                    var entry = lp.Get(tref.tileId);
+                    result[i] = entry != null ? entry.logicType : LogicTileType.Grass;
+                    found = true;
+                    break;
+                }
+                if (found) continue;
             }
             result[i] = LogicTileType.Grass;
         }

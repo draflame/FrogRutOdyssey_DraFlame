@@ -1,0 +1,166 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb85282e72152864b8f54b2b758800cf, type: 3}
+  m_Name: Level0.2
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  width: 8
+  height: 8
+  tileRefMap:
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  sceneName: TutorialScene
+  localPacks:
+  - {fileID: 11400000, guid: 04abf23a1a827be4280002f40bf0771b, type: 2}
+  - {fileID: 11400000, guid: 19b67806559373548bb5f8313242c8b4, type: 2}
+  - {fileID: 11400000, guid: bb3c7066147bc314aa8e2e36f8c8befc, type: 2}
+  startTile: {x: 2, y: 3}
+  difficulty: 0
+  solutionPath:
+  - {x: 2, y: 3}
+  - {x: 1, y: 1}
+  - {x: 3, y: 2}
+  - {x: 5, y: 3}
+  - {x: 4, y: 1}
+  - {x: 3, y: 3}
+  - {x: 2, y: 1}
+  - {x: 1, y: 3}
+  - {x: 2, y: 5}
+  - {x: 4, y: 6}
+  - {x: 5, y: 4}
+  - {x: 3, y: 5}
+  - {x: 1, y: 4}

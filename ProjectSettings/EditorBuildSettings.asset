@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RandomGameScene.unity
     guid: 1d2a4847d619f16469ca7127d8bd8e91
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: be1cbf741444fb64ca8f62c4efb91026
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
