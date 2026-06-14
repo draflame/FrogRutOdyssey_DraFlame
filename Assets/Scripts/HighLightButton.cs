@@ -28,6 +28,8 @@ public class HighLightButton : MonoBehaviour
         _gameController = Object.FindAnyObjectByType<GameController>();
         if (_gameController == null)
             _gameController = Object.FindAnyObjectByType<RandomGameController>();
+        if (_gameController == null)
+            _gameController = Object.FindAnyObjectByType<TutorialGameController>();
 
         // Đọc trạng thái từ SettingManager một lần duy nhất khi khởi tạo
         if (SettingManager.Instance != null)

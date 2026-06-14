@@ -133,6 +133,7 @@ public class SettingUIController : MonoBehaviour
         // Cập nhật GameController (ẩn/hiện ô gợi ý)
         IGameController gc = Object.FindAnyObjectByType<GameController>();
         if (gc == null) gc = Object.FindAnyObjectByType<RandomGameController>();
+        if (gc == null) gc = Object.FindAnyObjectByType<TutorialGameController>();
         gc?.SetHighlight(value);
 
         // Cập nhật sprite nút mắt trên màn chơi (nếu có)

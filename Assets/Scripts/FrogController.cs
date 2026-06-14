@@ -23,6 +23,10 @@ public class FrogController : MonoBehaviour
             {
                 game = Object.FindAnyObjectByType<RandomGameController>() as IGameController;
             }
+            if (game == null)
+            {
+                game = Object.FindAnyObjectByType<TutorialGameController>() as IGameController;
+            }
         }
         return game;
     }
