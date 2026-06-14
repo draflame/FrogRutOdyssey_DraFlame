@@ -9,7 +9,7 @@ public class LevelButton : MonoBehaviour
     [SerializeField] private GameObject lockIcon; // GameObject hình khóa hiển thị khi level bị khóa (tùy chọn)
 
     private int levelIndex;
-
+    private LevelData levelData;
     private void Awake()
     {
         // Tự động tìm Button component nếu chưa được kéo thả trong Inspector
@@ -19,7 +19,7 @@ public class LevelButton : MonoBehaviour
     public void Setup(int index, LevelData levelData, bool isUnlocked)
     {
         levelIndex = index;
-        
+        this.levelData = levelData;
         // Hiển thị tên của Level (tên file asset hoặc mặc định)
         levelText.text = levelData != null ? levelData.name : $"Level {index + 1}";
 
@@ -38,6 +38,6 @@ public class LevelButton : MonoBehaviour
     public void OnClick()
     {
         PlayerPrefs.SetInt("SelectedLevel", levelIndex);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(levelData.sceneName);
     }
 }

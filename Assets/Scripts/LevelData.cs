@@ -25,6 +25,7 @@ public class LevelData : ScriptableObject
     [Header("Map — TilePack Format (New)")]
     [Tooltip("Map dữ liệu mới dùng TilePack system. Nếu đã populate, GameController sẽ dùng cái này.")]
     public TileRef[] tileRefMap;
+    public string sceneName= "GameScene";
 
     [Tooltip("Danh sách các TilePack được sử dụng trong level này (gợi ý cho Editor).")]
     public TilePack[] localPacks;
