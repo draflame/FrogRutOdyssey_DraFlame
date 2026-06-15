@@ -75,6 +75,12 @@ public class FrogController : MonoBehaviour
         // Kích hoạt animation nhảy
         if (animator) animator.SetBool("Jump", true);
 
+        // Play jump sound
+        if (SettingManager.Instance != null)
+        {
+            SettingManager.Instance.PlayJumpSound();
+        }
+
         // Biến ô cũ thành trống
         ctrl.ClearTile(currentTile);
         ctrl.ConsumeTile(currentTile);

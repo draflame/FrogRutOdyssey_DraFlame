@@ -461,7 +461,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1739541842}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: Undo
+        m_MethodName: PlayAgain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4797,8 +4797,6 @@ MonoBehaviour:
   highLightSprite: {fileID: 1356339591869341262, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
   normalSprite: {fileID: -8105478313569605949, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
   buttonImage: {fileID: 788981960}
-  spriteRenderer: {fileID: 788981957}
-  toggleComponent: {fileID: 0}
 --- !u!114 &788981959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4842,7 +4840,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 788981960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1739541842}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: ToggleHighlight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &788981960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6326,7 +6336,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Undo
+  m_text: Retry
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c5bfb9edcfbc734db61fa89b52c6451, type: 2}
   m_sharedMaterial: {fileID: 7065903390936965891, guid: 3c5bfb9edcfbc734db61fa89b52c6451, type: 2}
@@ -6536,8 +6546,12 @@ MonoBehaviour:
   musicText: {fileID: 0}
   soundText: {fileID: 0}
   highlightText: {fileID: 0}
-  onSprite: {fileID: 0}
-  offSprite: {fileID: 0}
+  musicOnSprite: {fileID: 2196661466792726603, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  musicOffSprite: {fileID: -6576883276254621700, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  soundOnSprite: {fileID: 6720791692704842920, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  soundOffSprite: {fileID: -3432738817863419816, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  highlightOnSprite: {fileID: -8105478313569605949, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  highlightOffSprite: {fileID: 1356339591869341262, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
 --- !u!1 &1300156422
 GameObject:
   m_ObjectHideFlags: 0

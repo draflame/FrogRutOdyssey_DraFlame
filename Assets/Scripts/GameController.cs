@@ -116,6 +116,11 @@ public class GameController : MonoBehaviour, IGameController
 
     private void Start()
     {
+        if (SettingManager.Instance == null)
+        {
+            Debug.LogWarning("[GameController] SettingManager.Instance is null! Vui lòng chạy game từ scene 'MenuScene' để SettingManager được khởi tạo và truyền nhạc/âm thanh.");
+        }
+
         if (SceneManager.GetActiveScene().name != "RandomGameScene")
         {
             int level = PlayerPrefs.GetInt("SelectedLevel", 0);
@@ -409,6 +414,10 @@ public class GameController : MonoBehaviour, IGameController
         Time.timeScale = 0f;
         OnGamePanel.SetActive(false);
         camFitter.FitToTilemap();
+        if (SettingManager.Instance != null)
+        {
+            SettingManager.Instance.PlayLoseSound();
+        }
     }
 
     private void Win()
@@ -424,6 +433,10 @@ public class GameController : MonoBehaviour, IGameController
         {
             PlayerPrefs.SetInt("HighestLevel", currentLevelIndex + 1);
             PlayerPrefs.Save();
+        }
+        if (SettingManager.Instance != null)
+        {
+            SettingManager.Instance.PlayWinSound();
         }
     }
 

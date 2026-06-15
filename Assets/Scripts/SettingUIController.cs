@@ -35,11 +35,30 @@ public class SettingUIController : MonoBehaviour
     [SerializeField] private Sprite highlightOnSprite;
     [SerializeField] private Sprite highlightOffSprite;
 
+    private Sprite defaultMusicSprite;
+    private Sprite defaultSoundSprite;
+    private Sprite defaultHighlightSprite;
+
     private void Start()
     {
-        if (MusicToggle != null) MusicToggle.onClick.AddListener(OnMusicClick);
-        if (SoundToggle != null) SoundToggle.onClick.AddListener(OnSoundClick);
-        if (HighlightToggle != null) HighlightToggle.onClick.AddListener(OnHighlightClick);
+        if (MusicToggle != null)
+        {
+            MusicToggle.onClick.AddListener(OnMusicClick);
+            Image img = MusicToggle.GetComponent<Image>();
+            if (img != null) defaultMusicSprite = img.sprite;
+        }
+        if (SoundToggle != null)
+        {
+            SoundToggle.onClick.AddListener(OnSoundClick);
+            Image img = SoundToggle.GetComponent<Image>();
+            if (img != null) defaultSoundSprite = img.sprite;
+        }
+        if (HighlightToggle != null)
+        {
+            HighlightToggle.onClick.AddListener(OnHighlightClick);
+            Image img = HighlightToggle.GetComponent<Image>();
+            if (img != null) defaultHighlightSprite = img.sprite;
+        }
 
         UpdateUIState();
     }
@@ -91,18 +110,21 @@ public class SettingUIController : MonoBehaviour
             musicOnVisual, musicOffVisual,
             musicText, "Music",
             musicOnSprite, musicOffSprite,
+            defaultMusicSprite,
             SettingManager.Instance.IsMusicOn);
 
         UpdateToggleVisual(SoundToggle,
             soundOnVisual, soundOffVisual,
             soundText, "Sound",
             soundOnSprite, soundOffSprite,
+            defaultSoundSprite,
             SettingManager.Instance.IsSoundOn);
 
         UpdateToggleVisual(HighlightToggle,
             highlightOnVisual, highlightOffVisual,
             highlightText, "Highlight",
             highlightOnSprite, highlightOffSprite,
+            defaultHighlightSprite,
             SettingManager.Instance.IsHighlightOn);
     }
 
@@ -111,6 +133,7 @@ public class SettingUIController : MonoBehaviour
         GameObject onVisual, GameObject offVisual,
         TMP_Text textComp, string label,
         Sprite onSprite, Sprite offSprite,
+        Sprite defaultSprite,
         bool isOn)
     {
         if (onVisual != null)  onVisual.SetActive(isOn);
@@ -119,10 +142,19 @@ public class SettingUIController : MonoBehaviour
         if (textComp != null)
             textComp.text = $"{label}: {(isOn ? "ON" : "OFF")}";
 
-        if (btn != null && onSprite != null && offSprite != null)
+        if (btn != null)
         {
             Image img = btn.GetComponent<Image>();
-            if (img != null) img.sprite = isOn ? onSprite : offSprite;
+            if (img != null)
+            {
+                Sprite targetSprite = isOn ? onSprite : offSprite;
+                if (targetSprite == null) targetSprite = defaultSprite;
+
+                if (targetSprite != null)
+                {
+                    img.sprite = targetSprite;
+                }
+            }
         }
     }
 

@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &26645344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1714,7 +1714,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &674855827
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1732,7 +1732,6 @@ RectTransform:
   - {fileID: 2134271376}
   - {fileID: 1641148167}
   - {fileID: 1782528929}
-  - {fileID: 1634904681}
   - {fileID: 165505190}
   - {fileID: 83151684}
   m_Father: {fileID: 1074949322}
@@ -1979,6 +1978,7 @@ RectTransform:
   - {fileID: 551107971}
   - {fileID: 26645344}
   - {fileID: 960856340}
+  - {fileID: 1634904681}
   - {fileID: 62479453}
   - {fileID: 933602887}
   m_Father: {fileID: 1074949322}
@@ -2667,8 +2667,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 1793437812}
+        m_TargetAssemblyTypeName: TutorialGameController, Assembly-CSharp
         m_MethodName: BackToLevelSelect
         m_Mode: 1
         m_Arguments:
@@ -2842,12 +2842,12 @@ MonoBehaviour:
   musicText: {fileID: 0}
   soundText: {fileID: 0}
   highlightText: {fileID: 0}
-  musicOnSprite: {fileID: 0}
-  musicOffSprite: {fileID: 0}
-  soundOnSprite: {fileID: 0}
-  soundOffSprite: {fileID: 0}
-  highlightOnSprite: {fileID: 0}
-  highlightOffSprite: {fileID: 0}
+  musicOnSprite: {fileID: 2196661466792726603, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  musicOffSprite: {fileID: -6576883276254621700, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  soundOnSprite: {fileID: 6720791692704842920, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  soundOffSprite: {fileID: -3432738817863419816, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  highlightOnSprite: {fileID: 1356339591869341262, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
+  highlightOffSprite: {fileID: -8105478313569605949, guid: cdeb35d6cadae0e4d926478bc2f2378b, type: 3}
 --- !u!114 &1074949319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3269,8 +3269,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 1793437812}
+        m_TargetAssemblyTypeName: TutorialGameController, Assembly-CSharp
         m_MethodName: PlayAgain
         m_Mode: 1
         m_Arguments:
@@ -4058,7 +4058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1634904681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4072,7 +4072,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2135912785}
-  m_Father: {fileID: 674855827}
+  m_Father: {fileID: 793263368}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

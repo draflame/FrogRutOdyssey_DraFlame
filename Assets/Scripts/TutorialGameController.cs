@@ -69,6 +69,11 @@ public class TutorialGameController : MonoBehaviour, IGameController
 
     private void Start()
     {
+        if (SettingManager.Instance == null)
+        {
+            Debug.LogWarning("[TutorialGameController] SettingManager.Instance is null! Vui lòng chạy game từ scene 'MenuScene' để SettingManager được khởi tạo và truyền nhạc/âm thanh.");
+        }
+
         if (tutorialManager == null)
         {
             tutorialManager = Object.FindAnyObjectByType<ToturialManager>();
@@ -447,6 +452,10 @@ public class TutorialGameController : MonoBehaviour, IGameController
         {
             tutorialManager.OnLevelCompleted();
         }
+        if (SettingManager.Instance != null)
+        {
+            SettingManager.Instance.PlayWinSound();
+        }
     }
 
     private void GameOver()
@@ -459,6 +468,10 @@ public class TutorialGameController : MonoBehaviour, IGameController
         else
         {
             PlayAgain();
+        }
+        if (SettingManager.Instance != null)
+        {
+            SettingManager.Instance.PlayLoseSound();
         }
     }
 

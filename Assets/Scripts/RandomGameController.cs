@@ -77,6 +77,11 @@ public class RandomGameController : MonoBehaviour, IGameController
 
     private void Start()
     {
+        if (SettingManager.Instance == null)
+        {
+            Debug.LogWarning("[RandomGameController] SettingManager.Instance is null! Vui lòng chạy game từ scene 'MenuScene' để SettingManager được khởi tạo và truyền nhạc/âm thanh.");
+        }
+
         size = PlayerPrefs.GetInt("RandomMapSize", 8);
         difficulty = (Difficulty)PlayerPrefs.GetInt("RandomMapDifficulty", 0);
 
@@ -402,6 +407,10 @@ public class RandomGameController : MonoBehaviour, IGameController
         if (gameOverUI) gameOverUI.SetActive(true);
         Time.timeScale = 0f;
         OnGamePanel.SetActive(false);
+        if (SettingManager.Instance != null)
+        {
+            SettingManager.Instance.PlayLoseSound();
+        }
     }
 
     private void Win()
@@ -409,6 +418,10 @@ public class RandomGameController : MonoBehaviour, IGameController
         if (winUI) winUI.SetActive(true);
         Time.timeScale = 0f;
         OnGamePanel.SetActive(false);
+        if (SettingManager.Instance != null)
+        {
+            SettingManager.Instance.PlayWinSound();
+        }
     }
 
     public void SetLogicTile(Vector2Int tile, LogicTileType newLogic)
