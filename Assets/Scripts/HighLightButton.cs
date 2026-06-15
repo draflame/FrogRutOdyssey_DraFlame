@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,6 +37,26 @@ public class HighLightButton : MonoBehaviour
             isHighLight = SettingManager.Instance.IsHighlightOn;
 
         UpdateVisual();
+
+        // Delay 1 frame để đảm bảo GameController.Start() đã chạy xong
+        // (LoadLevel/SpawnFrog có thể chạy sau HighLightButton.Start())
+        // Sau đó sync lại sprite cho chắc chắn
+        StartCoroutine(SyncVisualNextFrame());
+    }
+
+    private IEnumerator SyncVisualNextFrame()
+    {
+        yield return null; // chờ 1 frame
+
+        if (SettingManager.Instance != null)
+        {
+            bool expected = SettingManager.Instance.IsHighlightOn;
+            if (isHighLight != expected)
+            {
+                isHighLight = expected;
+            }
+            UpdateVisual();
+        }
     }
 
     /// <summary>
