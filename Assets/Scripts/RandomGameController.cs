@@ -33,6 +33,9 @@ public class RandomGameController : MonoBehaviour, IGameController
     [SerializeField] private GameObject OnGamePanel;
     private bool isSetting = false;
 
+    [Header("Camera")]
+    [SerializeField] private CinemachineMapFitter camFitter;
+
 
 
     private HashSet<Vector2Int> visitedTiles = new();
@@ -89,6 +92,8 @@ public class RandomGameController : MonoBehaviour, IGameController
         int max = Mathf.RoundToInt(size * size * 0.65f);
 
         LoadRandomLevel(size, size, min, max);
+
+        if (camFitter != null) camFitter.FitToTilemap();
     }
 
     void Update()
@@ -193,6 +198,8 @@ public class RandomGameController : MonoBehaviour, IGameController
         DrawMap();
         SpawnFrog();
 
+        if (camFitter != null) camFitter.FitToTilemap();
+
         originalRefMap = (TileRef[])runtimeRefMap.Clone();
         originalStart = currentLevel.startTile;
         originalWalkable = totalWalkableTiles;
@@ -233,6 +240,8 @@ public class RandomGameController : MonoBehaviour, IGameController
 
         DrawMap();
         SpawnFrog();
+
+        if (camFitter != null) camFitter.FitToTilemap();
     }
 
     // ===================== IGameController IMPLEMENTATION =====================
