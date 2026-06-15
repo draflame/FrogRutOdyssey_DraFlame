@@ -162,14 +162,16 @@ public class SettingUIController : MonoBehaviour
 
     private void SyncHighlightToScene(bool value)
     {
-        // Cập nhật GameController (ẩn/hiện ô gợi ý)
-        IGameController gc = Object.FindAnyObjectByType<GameController>();
-        if (gc == null) gc = Object.FindAnyObjectByType<RandomGameController>();
-        if (gc == null) gc = Object.FindAnyObjectByType<TutorialGameController>();
-        gc?.SetHighlight(value);
+        // Tìm đúng game controller đang active trong scene hiện tại
+        IGameController gc = Object.FindAnyObjectByType<RandomGameController>() as IGameController;
+        if (gc == null) gc = Object.FindAnyObjectByType<GameController>() as IGameController;
+        if (gc == null) gc = Object.FindAnyObjectByType<TutorialGameController>() as IGameController;
+
+        if (gc != null)
+            gc.SetHighlight(value);
 
         // Cập nhật sprite nút mắt trên màn chơi (nếu có)
         HighLightButton hBtn = Object.FindAnyObjectByType<HighLightButton>();
-        hBtn?.SetHighLight(value);
+        if (hBtn != null) hBtn.SetHighLight(value);
     }
 }

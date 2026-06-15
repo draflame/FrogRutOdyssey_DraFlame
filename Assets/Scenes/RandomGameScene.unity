@@ -293,8 +293,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 334192830}
+        m_TargetAssemblyTypeName: RandomGameController, Assembly-CSharp
         m_MethodName: ToggleSetting
         m_Mode: 1
         m_Arguments:

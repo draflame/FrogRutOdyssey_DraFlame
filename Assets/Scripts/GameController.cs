@@ -513,7 +513,7 @@ public class GameController : MonoBehaviour, IGameController
     {
         showHighlight = !showHighlight;
         if (!showHighlight) ClearHighlights();
-        else HighlightValidMoves(frogInstance.currentTile);
+        else if (frogInstance != null) HighlightValidMoves(frogInstance.currentTile);
 
         // Đồng bộ ngược lại cho HighLightButton ngoài màn chơi (nếu có)
         HighLightButton hBtn = Object.FindAnyObjectByType<HighLightButton>();
@@ -523,9 +523,8 @@ public class GameController : MonoBehaviour, IGameController
     public void SetHighlight(bool value)
     {
         showHighlight = value;
-        Debug.Log("SetHighlight: " + showHighlight);
         if (!showHighlight) ClearHighlights();
-        else HighlightValidMoves(frogInstance.currentTile);
+        else if (frogInstance != null) HighlightValidMoves(frogInstance.currentTile);
 
         // Đồng bộ ngược lại cho HighLightButton ngoài màn chơi (nếu có)
         HighLightButton hBtn = Object.FindAnyObjectByType<HighLightButton>();
