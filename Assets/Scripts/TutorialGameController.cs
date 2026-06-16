@@ -448,6 +448,18 @@ public class TutorialGameController : MonoBehaviour, IGameController
     {
         IsPlayable = false;
         ClearHighlights();
+
+        // Chỉ mở khóa Level 1 khi hoàn thành màn chơi cuối cùng của tutorial
+        if (currentLevelIndex == levelDatabase.levels.Count - 1)
+        {
+            int highestLevel = PlayerPrefs.GetInt("HighestLevel", 0);
+            if (highestLevel < 1)
+            {
+                PlayerPrefs.SetInt("HighestLevel", 1);
+                PlayerPrefs.Save();
+            }
+        }
+
         if (tutorialManager != null)
         {
             tutorialManager.OnLevelCompleted();

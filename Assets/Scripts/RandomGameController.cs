@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class RandomGameController : MonoBehaviour, IGameController
 {
@@ -35,6 +36,10 @@ public class RandomGameController : MonoBehaviour, IGameController
 
     [Header("Camera")]
     [SerializeField] private CinemachineMapFitter camFitter;
+
+    [Header("Difficulty Dropdown")]
+    [Tooltip("Dropdown Legacy — Options phải đúng thứ tự: Easy, Normal, Hard, VeryHard, Expert, Nightmare")]
+    [SerializeField] private Dropdown difficultyDropdown;
 
 
 
@@ -88,6 +93,10 @@ public class RandomGameController : MonoBehaviour, IGameController
         size = PlayerPrefs.GetInt("RandomMapSize", 8);
         difficulty = (Difficulty)PlayerPrefs.GetInt("RandomMapDifficulty", 0);
 
+        // Đồng bộ dropdown với difficulty hiện tại
+        if (difficultyDropdown != null)
+            difficultyDropdown.value = (int)difficulty;
+
         int min = Mathf.RoundToInt(size * size * 0.4f);
         int max = Mathf.RoundToInt(size * size * 0.65f);
 
@@ -134,9 +143,12 @@ public class RandomGameController : MonoBehaviour, IGameController
 
         switch (difficulty)
         {
-            case Difficulty.Easy:   lotusRatio = 0.45f; break;
-            case Difficulty.Normal: lotusRatio = 0.55f; break;
-            case Difficulty.Hard:   lotusRatio = 0.6f;  break;
+            case Difficulty.Easy:      lotusRatio = 0.40f; break;
+            case Difficulty.Normal:    lotusRatio = 0.50f; break;
+            case Difficulty.Hard:      lotusRatio = 0.60f; break;
+            case Difficulty.VeryHard:  lotusRatio = 0.70f; break;
+            case Difficulty.Expert:    lotusRatio = 0.80f; break;
+            case Difficulty.Nightmare: lotusRatio = 0.90f; break;
         }
 
         int lotusCount = Mathf.Clamp(Mathf.RoundToInt(w * h * lotusRatio), minLotus, maxLotus);
@@ -207,6 +219,14 @@ public class RandomGameController : MonoBehaviour, IGameController
 
     public void ReloadRandomLevel()
     {
+        // Đọc độ khó từ dropdown nếu có
+        if (difficultyDropdown != null)
+        {
+            difficulty = (Difficulty)difficultyDropdown.value;
+            PlayerPrefs.SetInt("RandomMapDifficulty", (int)difficulty);
+            PlayerPrefs.Save();
+        }
+
         int size = PlayerPrefs.GetInt("RandomMapSize", 8);
         int min = Mathf.RoundToInt(size * size * 0.4f);
         int max = Mathf.RoundToInt(size * size * 0.65f);

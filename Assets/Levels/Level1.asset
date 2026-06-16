@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb85282e72152864b8f54b2b758800cf, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  width: 6
+  width: 7
   height: 6
   tileRefMap:
+  - packName: Default
+    tileId: Small Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Left Grass
   - packName: Default
     tileId: Grass
   - packName: Default
@@ -25,76 +31,84 @@ MonoBehaviour:
     tileId: Grass
   - packName: Default
     tileId: Grass
-  - packName: 
-    tileId: 
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Cattail
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Wave
+  - packName: Default
+    tileId: Small Stone
+  - packName: Default
+    tileId: Small Grass
+  - packName: Default
+    tileId: Lotus Small Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
   - packName: Default
     tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Stone Water
+  - packName: Default
+    tileId: Small Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
   - packName: Default
     tileId: Cattail
   - packName: Default
     tileId: Lotus Leaf
   - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Wave
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
     tileId: Grass
   - packName: Default
     tileId: Bush
   - packName: Default
-    tileId: Grass
+    tileId: Tree 2
+  - packName: Default
+    tileId: Right Top Stone
   - packName: Default
     tileId: Grass
   - packName: Default
-    tileId: Grass
+    tileId: Well
+  - packName: Default
+    tileId: Small Stone
+  - packName: Default
+    tileId: Right Top Grass
+  sceneName: GameScene
   localPacks:
   - {fileID: 11400000, guid: 04abf23a1a827be4280002f40bf0771b, type: 2}
-  map: 020000000d0000000200000002000000020000000800000002000000090000000100000003000000030000000200000002000000010000000b00000001000000030000000200000002000000030000000300000001000000030000000200000002000000030000000100000003000000030000000200000010000000020000000a000000140000000200000002000000
-  startTile: {x: 2, y: 1}
+  startTile: {x: 3, y: 3}
   difficulty: 0
   solutionPath:
-  - {x: 2, y: 1}
   - {x: 3, y: 3}
-  - {x: 1, y: 2}
-  - {x: 2, y: 4}
+  - {x: 5, y: 4}
+  - {x: 4, y: 2}
+  - {x: 3, y: 4}
+  - {x: 1, y: 3}
   - {x: 3, y: 2}
+  - {x: 1, y: 1}

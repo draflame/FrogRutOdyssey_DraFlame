@@ -207,6 +207,12 @@ MonoBehaviour:
     category: 
     isWalkable: 0
     logicType: 2
+  - id: Water
+    tile: {fileID: 11400000, guid: d6a0f1d688c1bb64d81c5b4ac7011467, type: 2}
+    editorColor: {r: 0.19433957, g: 1, b: 0.99840635, a: 0}
+    category: 
+    isWalkable: 0
+    logicType: 2
   - id: Weed
     tile: {fileID: 11400000, guid: b583a09dfe6acfe4ab3d2aa1b7e07d70, type: 2}
     editorColor: {r: 0.4784314, g: 0.6392157, b: 0.76470596, a: 0}

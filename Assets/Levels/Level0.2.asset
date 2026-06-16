@@ -25,76 +25,14 @@ MonoBehaviour:
     tileId: Grass
   - packName: Default
     tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Lotus Leaf
-  - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Grass
+  - packName: Dafault Decorator
+    tileId: Small Grass 2
+  - packName: Dafault Decorator
+    tileId: Daisy
+  - packName: Dafault Decorator
+    tileId: Vertical Path
+  - packName: Dafault Decorator
+    tileId: 'Small Stone '
   - packName: Default
     tileId: Grass
   - packName: Default
@@ -102,21 +40,65 @@ MonoBehaviour:
   - packName: Default
     tileId: Lotus Leaf
   - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Stone Water
+  - packName: Dafault Decorator
+    tileId: Daisy
+  - packName: Dafault Decorator
+    tileId: Vertical Path
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Wave
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Dafault Decorator
+    tileId: Daisy
+  - packName: Dafault Decorator
+    tileId: Vertical Path
+  - packName: Default
+    tileId: Grass
+  - packName: Dafault Decorator
+    tileId: 'Small Stone '
+  - packName: Default
     tileId: Lotus Leaf
   - packName: Default
     tileId: Water
   - packName: Default
-    tileId: Water
-  - packName: Default
-    tileId: Water
+    tileId: Lotus Leaf
+  - packName: Dafault Decorator
+    tileId: Weed
+  - packName: Dafault Decorator
+    tileId: Daisy
+  - packName: Dafault Decorator
+    tileId: Vertical Path
   - packName: Default
     tileId: Grass
   - packName: Default
     tileId: Grass
+  - packName: Dafault Decorator
+    tileId: Weed
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Lotus Leaf
   - packName: Default
     tileId: Water
-  - packName: Default
-    tileId: Water
+  - packName: Dafault Decorator
+    tileId: Daisy
+  - packName: Dafault Decorator
+    tileId: Vertical Path
+  - packName: Dafault Decorator
+    tileId: Small Grass 2
+  - packName: Dafault Decorator
+    tileId: Mushroom
   - packName: Default
     tileId: Water
   - packName: Default
@@ -125,22 +107,40 @@ MonoBehaviour:
     tileId: Water
   - packName: Default
     tileId: Water
+  - packName: Dafault Decorator
+    tileId: Daisy
+  - packName: Dafault Decorator
+    tileId: Vertical Path
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Grass
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Water
+  - packName: Default
+    tileId: Lotus Leaf
+  - packName: Dafault Decorator
+    tileId: Daisy
+  - packName: Dafault Decorator
+    tileId: Wooden Bench 2
+  - packName: Dafault Decorator
+    tileId: Red Mushroom
+  - packName: Default
+    tileId: Grass
+  - packName: Dafault Decorator
+    tileId: Small Grass 2
   - packName: Default
     tileId: Grass
   - packName: Default
     tileId: Grass
   - packName: Default
     tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
-  - packName: Default
-    tileId: Grass
+  - packName: Dafault Decorator
+    tileId: Snail
   - packName: Default
     tileId: Grass
   sceneName: TutorialScene
@@ -148,19 +148,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 04abf23a1a827be4280002f40bf0771b, type: 2}
   - {fileID: 11400000, guid: 19b67806559373548bb5f8313242c8b4, type: 2}
   - {fileID: 11400000, guid: bb3c7066147bc314aa8e2e36f8c8befc, type: 2}
-  startTile: {x: 2, y: 3}
+  startTile: {x: 4, y: 4}
   difficulty: 0
   solutionPath:
-  - {x: 2, y: 3}
-  - {x: 1, y: 1}
-  - {x: 3, y: 2}
-  - {x: 5, y: 3}
-  - {x: 4, y: 1}
-  - {x: 3, y: 3}
-  - {x: 2, y: 1}
-  - {x: 1, y: 3}
-  - {x: 2, y: 5}
-  - {x: 4, y: 6}
-  - {x: 5, y: 4}
+  - {x: 4, y: 4}
+  - {x: 5, y: 6}
   - {x: 3, y: 5}
-  - {x: 1, y: 4}
+  - {x: 4, y: 3}
+  - {x: 3, y: 1}
+  - {x: 2, y: 3}
+  - {x: 4, y: 2}
+  - {x: 3, y: 4}
+  - {x: 2, y: 6}
